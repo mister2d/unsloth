@@ -36,12 +36,15 @@ let
 
 in {
   # ── Packages ───────────────────────────────────────────────────────────
-  packages = common-pkgs ++ gpu-pkgs;
+  packages = common-pkgs ++ gpu-pkgs ++ [ pkgs.uv ];
 
   # ── Languages ──────────────────────────────────────────────────────────
   languages.python = {
     enable = true;
-    uv.enable = true;
+    uv = {
+      enable = true;
+      sync.enable = true;
+    };
     venv.enable = true;
     lsp.enable = true;
   };
@@ -49,7 +52,10 @@ in {
   languages.javascript = {
     enable = true;
     package = pkgs.nodejs_20;
-    npm.enable = true;
+    npm = {
+      enable = true;
+      install.enable = true;
+    };
   };
 
   # ── Environment ────────────────────────────────────────────────────────
@@ -82,23 +88,12 @@ in {
 
   scripts."start-backend".exec = ''
     echo "Starting Unsloth Studio Backend..."
-    # Ensure dependencies are installed
-    if [ ! -d "$HOME/.unsloth/studio/.venv" ]; then
-      ./studio/setup.sh
-    fi
-    # Use the venv created by setup.sh or the devenv venv
-    # studio/setup.sh creates one in ~/.unsloth/studio/.venv
-    source "$HOME/.unsloth/studio/.venv/bin/activate"
     python studio/backend/run.py
   '';
 
   scripts."start-frontend".exec = ''
     echo "Starting Unsloth Studio Frontend..."
     cd studio/frontend
-    if [ ! -f "node_modules/.bin/vite" ]; then
-      echo "Vite not found in node_modules, installing frontend dependencies..."
-      npm install
-    fi
     npm run dev
   '';
 
