@@ -65,15 +65,27 @@ class LlamaCppBackend:
 
     @property
     def is_loaded(self) -> bool:
+        import os
+
+        remote_url = os.environ.get("LLAMA_SERVER_URL")
+        if remote_url:
+            return True
         return self._process is not None and self._healthy
 
     @property
     def is_active(self) -> bool:
-        """True if a llama-server process exists (loading or loaded)."""
-        return self._process is not None
+        """True if a llama-server process exists (loading or loaded) or remote URL is set."""
+        import os
+
+        return self._process is not None or bool(os.environ.get("LLAMA_SERVER_URL"))
 
     @property
     def base_url(self) -> str:
+        import os
+
+        remote_url = os.environ.get("LLAMA_SERVER_URL")
+        if remote_url:
+            return remote_url.rstrip("/")
         return f"http://127.0.0.1:{self._port}"
 
     @property
@@ -774,6 +786,15 @@ class LlamaCppBackend:
 
         Returns True if server started and health check passed.
         """
+        import os
+
+        remote_url = os.environ.get("LLAMA_SERVER_URL")
+        if remote_url:
+            logger.info(f"Using remote llama.cpp server: {remote_url}")
+            self._model_identifier = model_identifier or "remote-model"
+            self._healthy = True
+            return True
+
         self._cancel_event.clear()
 
         # ── Phase 1: kill old process (under lock, fast) ──────────
