@@ -29,16 +29,14 @@ let
     ] else if hasAmd then [
       pkgs.rocmPackages.clr
       pkgs.rocmPackages.rocblas
-      pkgs.rocmPackages.hip
+      pkgs.rocmPackages.hip-common
+      pkgs.rocmPackages.hipcc
       pkgs.rocmPackages.rocm-smi
     ] else [ ];
 
 in {
   # ── Packages ───────────────────────────────────────────────────────────
-  packages = common-pkgs ++ (with pkgs; [
-    # Node.js for frontend
-    nodejs_20
-  ]);
+  packages = common-pkgs ++ gpu-pkgs;
 
   # ── Languages ──────────────────────────────────────────────────────────
   languages.python = {
@@ -50,6 +48,7 @@ in {
 
   languages.javascript = {
     enable = true;
+    package = pkgs.nodejs_20;
     npm.enable = true;
   };
 
@@ -96,8 +95,8 @@ in {
   scripts."start-frontend".exec = ''
     echo "Starting Unsloth Studio Frontend..."
     cd studio/frontend
-    if [ ! -d "node_modules" ]; then
-      echo "node_modules not found, installing..."
+    if [ ! -f "node_modules/.bin/vite" ]; then
+      echo "Vite not found in node_modules, installing frontend dependencies..."
       npm install
     fi
     npm run dev
