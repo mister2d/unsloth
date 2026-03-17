@@ -96,6 +96,10 @@ in {
   scripts."start-frontend".exec = ''
     echo "Starting Unsloth Studio Frontend..."
     cd studio/frontend
+    if [ ! -d "node_modules" ]; then
+      echo "node_modules not found, installing..."
+      npm install
+    fi
     npm run dev
   '';
 
