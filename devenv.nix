@@ -35,17 +35,14 @@ let
 
 in {
   # ── Packages ───────────────────────────────────────────────────────────
-  packages = common-pkgs ++ gpu-pkgs ++ (with pkgs; [
+  packages = common-pkgs ++ (with pkgs; [
     # Node.js for frontend
     nodejs_20
-    # Utility for inference/export
-    (if hasNvidia then nvidia-container-toolkit else pkgs.hello) # hello as placeholder
   ]);
 
   # ── Languages ──────────────────────────────────────────────────────────
   languages.python = {
     enable = true;
-    version = "3.12";
     uv.enable = true;
     venv.enable = true;
     lsp.enable = true;
