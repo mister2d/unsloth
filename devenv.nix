@@ -36,27 +36,23 @@ let
 
 in {
   # ── Packages ───────────────────────────────────────────────────────────
-  packages = common-pkgs ++ gpu-pkgs ++ [ pkgs.uv ];
+  packages = common-pkgs ++ gpu-pkgs ++ [ 
+    pkgs.uv 
+    pkgs.python312
+    pkgs.nodejs_22 # Use newer node to satisfy setup.sh check if it runs
+    pkgs.pre-commit
+  ];
 
   # ── Languages ──────────────────────────────────────────────────────────
+  # We manage toolchains manually to avoid failing root-level automatic syncs
   languages.python = {
     enable = true;
-    uv = {
-      enable = true;
-      sync.enable = true;
-    };
-    venv.enable = true;
-    lsp.enable = true;
+    venv.enable = true; # Creates $DEVENV_STATE/venv
   };
+  languages.javascript.enable = false;
 
-  languages.javascript = {
-    enable = true;
-    package = pkgs.nodejs_20;
-    npm = {
-      enable = true;
-      install.enable = true;
-    };
-  };
+  # ── Tasks ──────────────────────────────────────────────────────────────
+  # No tasks needed, initialization handled in enterShell for better environment awareness
 
   # ── Environment ────────────────────────────────────────────────────────
   env = {
@@ -80,32 +76,12 @@ in {
     );
   };
 
-  # ── Scripts ────────────────────────────────────────────────────────────
-  scripts."setup-unsloth".exec = ''
-    echo "Running Unsloth Studio setup..."
-    ./studio/setup.sh
-  '';
-
-  scripts."start-backend".exec = ''
-    echo "Starting Unsloth Studio Backend..."
+  # ── Processes ──────────────────────────────────────────────────────────
+  processes.backend.exec = ''
+    source "$DEVENV_STATE/venv/bin/activate"
     python studio/backend/run.py
   '';
-
-  scripts."start-frontend".exec = ''
-    echo "Starting Unsloth Studio Frontend..."
-    cd studio/frontend
-    npm run dev
-  '';
-
-  # ── Processes ──────────────────────────────────────────────────────────
-  processes.backend.exec = "devenv shell start-backend";
-  processes.frontend.exec = "devenv shell start-frontend";
-
-  # ── Git hooks ──────────────────────────────────────────────────────────
-  git-hooks.hooks = {
-    ruff.enable = true;
-    # Add other hooks like prettier for frontend if needed
-  };
+  processes.frontend.exec = "cd studio/frontend && npm run dev";
 
   # ── Shell ──────────────────────────────────────────────────────────────
   enterShell = ''
@@ -125,11 +101,23 @@ in {
       export DEVICE_TYPE="cpu"
     fi
     echo ""
-    echo "Available scripts:"
-    echo "  setup-unsloth  - Run the official setup script"
-    echo "  start-backend  - Start the studio backend"
-    echo "  start-frontend - Start the studio frontend"
+
+    # Location-aware initialization
+    if [ ! -f "studio/frontend/node_modules/.bin/vite" ]; then
+      echo "Initializing frontend dependencies..."
+      (cd studio/frontend && npm install)
+    fi
+
+    # Check if unsloth is installed in the venv
+    if ! python -c "import unsloth" &>/dev/null; then
+      echo "Initializing backend dependencies into managed venv..."
+      uv pip install -r studio/backend/requirements/base.txt
+      uv pip install -r studio/backend/requirements/studio.txt
+      uv pip install -e .
+    fi
+
     echo ""
-    echo "To start everything at once, run: devenv up"
+    echo "The environment is ready. To start Unsloth Studio, run:"
+    echo "  devenv up"
   '';
 }
