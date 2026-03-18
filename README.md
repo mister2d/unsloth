@@ -48,14 +48,7 @@ Unsloth Studio works on **Windows, Linux, WSL** and **macOS**.
 * **macOS:** Currently supports chat only; **MLX training** is coming very soon
 * **Multi-GPU:** Available now, with a major upgrade on the way
 
-#### Windows, MacOS Linux or WSL:
-```
-pip install unsloth
-unsloth studio setup
-unsloth studio -H 0.0.0.0 -p 8888
-```
-Use our [Docker image](https://hub.docker.com/r/unsloth/unsloth) ```unsloth/unsloth``` container. Read our [Docker Guide](https://unsloth.ai/docs/get-started/install/docker).
-#### Git from source
+#### Windows, MacOS, Linux or WSL:
 ```
 git clone https://github.com/unslothai/unsloth.git
 cd unsloth
@@ -63,6 +56,7 @@ pip install -e .
 unsloth studio setup
 unsloth studio -H 0.0.0.0 -p 8888
 ```
+Use our [Docker image](https://hub.docker.com/r/unsloth/unsloth) ```unsloth/unsloth``` container. Read our [Docker Guide](https://unsloth.ai/docs/get-started/install/docker).
 
 ### Unsloth Core (code-based)
 #### Windows, Linux, WSL
@@ -130,6 +124,11 @@ You can cite the Unsloth repo as follows:
 }
 ```
 If you trained a model with 🦥Unsloth, you can use this cool sticker!   <img src="https://raw.githubusercontent.com/unslothai/unsloth/main/images/made with unsloth.png" width="200" align="center" />
+
+### License
+Unsloth uses a dual-licensing model of Apache 2.0 and AGPL-3.0. The core Unsloth package remains licensed under **[Apache 2.0](https://github.com/unslothai/unsloth?tab=Apache-2.0-1-ov-file)**, while certain optional components, such as the Unsloth Studio UI are licensed under **[AGPL-3.0](https://github.com/unslothai/unsloth?tab=AGPL-3.0-2-ov-file)**.
+
+This structure helps support ongoing Unsloth development while keeping the project open source and enabling the broader ecosystem to continue growing.
 
 ### Thank You to
 - The [llama.cpp library](https://github.com/ggml-org/llama.cpp) that lets users run and save models with Unsloth
