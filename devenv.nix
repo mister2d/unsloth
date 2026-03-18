@@ -39,7 +39,7 @@ in {
   packages = common-pkgs ++ gpu-pkgs ++ [ 
     pkgs.uv 
     pkgs.python312
-    pkgs.nodejs_22 # Use newer node to satisfy setup.sh check if it runs
+    pkgs.nodejs_22
     pkgs.pre-commit
   ];
 
@@ -50,9 +50,6 @@ in {
     venv.enable = true; # Creates $DEVENV_STATE/venv
   };
   languages.javascript.enable = false;
-
-  # ── Tasks ──────────────────────────────────────────────────────────────
-  # No tasks needed, initialization handled in enterShell for better environment awareness
 
   # ── Environment ────────────────────────────────────────────────────────
   env = {
@@ -76,12 +73,35 @@ in {
     );
   };
 
-  # ── Processes ──────────────────────────────────────────────────────────
-  processes.backend.exec = ''
-    source "$DEVENV_STATE/venv/bin/activate"
+  # ── Scripts ────────────────────────────────────────────────────────────
+  scripts."setup-unsloth".exec = ''
+    echo "Running Unsloth Studio setup..."
+    # Ensure frontend is built
+    cd studio/frontend
+    if [ ! -d "node_modules" ]; then npm install; fi
+    npm run build
+    cd ../..
+    # Backend setup
+    uv pip install -r studio/backend/requirements/base.txt
+    uv pip install -r studio/backend/requirements/studio.txt
+    uv pip install -e .
+  '';
+
+  scripts."start-backend".exec = ''
+    echo "Starting Unsloth Studio Backend..."
     python studio/backend/run.py
   '';
-  processes.frontend.exec = "cd studio/frontend && npm run dev";
+
+  scripts."start-frontend".exec = ''
+    echo "Starting Unsloth Studio Frontend..."
+    cd studio/frontend
+    if [ ! -d "node_modules" ]; then npm install; fi
+    npm run dev
+  '';
+
+  # ── Processes ──────────────────────────────────────────────────────────
+  processes.backend.exec = "start-backend";
+  processes.frontend.exec = "start-frontend";
 
   # ── Shell ──────────────────────────────────────────────────────────────
   enterShell = ''
@@ -102,6 +122,9 @@ in {
     fi
     echo ""
 
+    # Ensure UV knows where the venv is for automatic targeting
+    export UV_PROJECT_ENVIRONMENT="$DEVENV_STATE/venv"
+
     # Location-aware initialization
     if [ ! -f "studio/frontend/node_modules/.bin/vite" ]; then
       echo "Initializing frontend dependencies..."
@@ -117,7 +140,11 @@ in {
     fi
 
     echo ""
-    echo "The environment is ready. To start Unsloth Studio, run:"
-    echo "  devenv up"
+    echo "Available scripts:"
+    echo "  setup-unsloth  - Run the full setup"
+    echo "  start-backend  - Start the studio backend"
+    echo "  start-frontend - Start the studio frontend"
+    echo ""
+    echo "To start everything at once, run: devenv up"
   '';
 }
