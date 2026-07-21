@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
+#
+# AMD-only devenv for Unsloth Studio. See DEVENV.md for the full rationale,
+# including why NixOS is not an AMD-supported OS and why Nix only supplies
+# ROCm *runtime* libraries (the torch/bitsandbytes/triton wheels are still
+# installed via uv from download.pytorch.org, exactly as Unsloth's official
+# AMD docs prescribe).
+
+inputs:
+  # Pinned to the EXACT nixos-unstable commit that nix/flake.nix pins (and that
+  # the NVIDIA-side devenv.lock locked), NOT the moving "nixos-unstable" branch.
+  # This env inlines pkgs.rocmPackages.* from this nixpkgs (see devenv.nix), so
+  # matching the flake's pin makes the inlined ROCm runtime libraries
+  # byte-identical to what the flake's devShell provides — keeping the flake the
+  # true single source of truth for the runtime, with zero drift between
+  # `devenv shell` and `nix develop ./nix` users.
+  nixpkgs:
+    url: github:NixOS/nixpkgs/5b2c2d84341b2afb5647081c1386a80d7a8d8605
+
+  git-hooks:
+    url: github:cachix/git-hooks.nix
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+
+  # Local ROCm flake (nix/flake.nix), pinned as the single source of truth for
+  # the ROCm runtime it documents. NOTE: a `path:` flakeref must point at the
+  # *directory* containing flake.nix, not the file — `path:./flake.nix` fails to
+  # resolve ("path ... does not exist"); `path:./` resolves to this nix/ dir.
+  rocm-flake:
+    url: path:./
