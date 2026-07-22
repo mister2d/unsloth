@@ -97,6 +97,14 @@ in {
     # CUDA torch back in transitively. No PyTorch wheels exist for ROCm 7.2+ yet,
     # so rocm7.1 is the current blessed tag (see DEVENV.md).
     uv pip install --python "$VENV_PYTHON" torch torchvision --index-url https://download.pytorch.org/whl/rocm7.1 --upgrade --force-reinstall
+    # studio.txt pins a stale huggingface-hub==0.36.2 that clobbers the modern
+    # one base.txt resolved; transformers require_version()s >=1.5.0,<2.0 at
+    # import. Same clobber-then-correct pattern as torch: fix it as the last step.
+    uv pip install --python "$VENV_PYTHON" "huggingface-hub>=1.5.0,<2.0" --upgrade
+    # Verification gate: assert the authoritative package state and fail loudly
+    # rather than let a broken env silently start (see failure-mode catalog #3/#4/#6).
+    # Single-line python (semicolons) avoids leading-indent sensitivity of `-c`.
+    "$VENV_PYTHON" -c "import torch, huggingface_hub; assert torch.version.hip is not None, f'torch is not a ROCm build: {torch.__version__}'; hf_ver = tuple(int(p) for p in huggingface_hub.__version__.split('.')[:2]); assert (1, 5) <= hf_ver < (2, 0), f'huggingface-hub {huggingface_hub.__version__} does not satisfy >=1.5.0,<2.0'; print(f'[nix/devenv] verified torch={torch.__version__} huggingface_hub={huggingface_hub.__version__}')"
   '';
 
   scripts."start-backend".exec = ''
@@ -166,6 +174,14 @@ in {
       uv pip install --python "$VENV_PYTHON" -r "$REPO_ROOT/studio/backend/requirements/studio.txt"
       uv pip install --python "$VENV_PYTHON" -e "$REPO_ROOT"
       uv pip install --python "$VENV_PYTHON" torch torchvision --index-url https://download.pytorch.org/whl/rocm7.1 --upgrade --force-reinstall
+      # studio.txt pins a stale huggingface-hub==0.36.2 that clobbers the modern
+      # one base.txt resolved; transformers require_version()s >=1.5.0,<2.0 at
+      # import. Same clobber-then-correct pattern as torch: fix it as the last step.
+      uv pip install --python "$VENV_PYTHON" "huggingface-hub>=1.5.0,<2.0" --upgrade
+      # Verification gate: assert the authoritative package state and fail loudly
+      # rather than let a broken env silently start (see failure-mode catalog #3/#4/#6).
+      # Single-line python (semicolons) avoids leading-indent sensitivity of `-c`.
+      "$VENV_PYTHON" -c "import torch, huggingface_hub; assert torch.version.hip is not None, f'torch is not a ROCm build: {torch.__version__}'; hf_ver = tuple(int(p) for p in huggingface_hub.__version__.split('.')[:2]); assert (1, 5) <= hf_ver < (2, 0), f'huggingface-hub {huggingface_hub.__version__} does not satisfy >=1.5.0,<2.0'; print(f'[nix/devenv] verified torch={torch.__version__} huggingface_hub={huggingface_hub.__version__}')"
     fi
 
     echo ""

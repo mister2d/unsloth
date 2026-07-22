@@ -7,3 +7,7 @@
 .pre-commit-config.yaml
 
 # devenv.lock and flake.lock ARE tracked (pinned inputs for reproducibility).
+
+# Per-user/per-host real-AMD-GPU validation target for amd-nix-validator.
+# Local convenience only — never commit a specific hostname.
+.amd-validator-host
