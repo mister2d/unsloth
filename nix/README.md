@@ -1,0 +1,123 @@
+# `nix/` — Nix-based development environment for Unsloth Studio on AMD GPUs
+
+This directory lets you stand up a working, reproducible development copy of
+[Unsloth Studio](../studio) on an AMD GPU using [Nix](https://nixos.org/) and
+[devenv](https://devenv.sh/), with a handful of commands. You don't need to
+know Nix to use it — this document explains what it does and why, end to end.
+
+If you just want the command reference (prerequisites, exact commands,
+troubleshooting), see **[`DEVENV.md`](./DEVENV.md)**. If you're an AI coding
+agent maintaining this environment, see **[`CLAUDE.md`](./CLAUDE.md)** for the
+architecture constraints and a catalog of every failure mode hit so far. This
+README is the "what is this and how does it fit together" overview.
+
+## Why this exists
+
+Unsloth added official support for fine-tuning LLMs on AMD GPUs (ROCm),
+alongside its existing NVIDIA (CUDA) support. Setting up a matching *local
+development* environment by hand — the right system ROCm libraries, the right
+Python packages, the right versions of each, all pinned so it works the same
+way on every machine — is fiddly and easy to get subtly wrong. This directory
+does that setup declaratively: run one command, get a working shell with
+everything Unsloth Studio needs to build, run, and be developed against on an
+AMD GPU.
+
+It's a sibling to [`../debug/unsloth.nvidia/`](../debug/unsloth.nvidia), which
+does the equivalent for NVIDIA/CUDA using a different (older, non-flake)
+technique. This directory is AMD-only and uses a proper Nix flake.
+
+## What's actually in here
+
+| File | Role |
+| --- | --- |
+| `flake.nix` / `flake.lock` | The core Nix definition: which packages, which versions (pinned), what environment variables. Usable on its own via plain `nix develop`, independent of devenv. |
+| `devenv.yaml` / `devenv.lock` | Tells [devenv](https://devenv.sh/) which `flake.nix` to use and pins its own inputs. |
+| `devenv.nix` | The developer-facing layer on top of the flake: installs the Python ML stack, builds the frontend, and defines the `setup-unsloth` / `start-backend` / `start-frontend` commands you actually run. |
+| `DEVENV.md` | Usage instructions and troubleshooting for developers. |
+| `CLAUDE.md` | Architecture rationale and a failure-mode catalog, for whoever (human or AI agent) maintains this environment over time. |
+| `.gitignore` | Keeps generated/local state (Nix's build cache, your personal validation-host setting) out of version control. |
+
+## The lifecycle, step by step
+
+This is what actually happens, in order, when you use this environment:
+
+### 1. `devenv shell` — build the environment
+
+You run this once per machine (and again whenever the environment definition
+changes). Here's what happens under the hood:
+
+1. **Nix reads `flake.nix`**, resolves it against the *exact* pinned version
+   of the Linux package repository (`nixpkgs`) recorded in `flake.lock` — not
+   "whatever the latest packages happen to be today." This is what makes the
+   environment reproducible: the same `flake.lock` produces the same packages
+   on any machine, at any point in the future.
+2. **Nix fetches or builds the packages** the flake asks for: general
+   development tools (git, cmake, Python, Node.js, `uv`) plus the AMD ROCm
+   *runtime* libraries (the `.so` files that let compiled programs talk to an
+   AMD GPU). Nothing here is compiled from scratch on your machine in the
+   normal case — Nix downloads pre-built copies from a shared cache.
+3. **devenv layers its own setup on top**: it creates an isolated Python
+   virtual environment for this project, wires up the environment variables
+   the ROCm libraries need to be found at runtime (`LD_LIBRARY_PATH`,
+   `ROCM_PATH`, `HIP_PATH`), and runs a startup check that tells you whether
+   this machine actually has a working AMD GPU driver present
+   (`/dev/kfd`) — a warning if not, since you can still develop non-GPU code
+   without one.
+4. You're dropped into a shell with all of that active. Nothing outside this
+   shell (your regular system Python, other projects) is touched or affected.
+
+### 2. `setup-unsloth` — install Unsloth Studio itself
+
+The Nix layer above deliberately does **not** install Unsloth, PyTorch, or any
+Python machine-learning package — those change far too often to pin sensibly
+in Nix, and AMD ships its own official prebuilt versions of them. So this
+step:
+
+1. Builds the frontend (the web UI you'll open in a browser) with `npm`.
+2. Installs Unsloth's own Python dependencies.
+3. As the *very last* thing, installs the correct AMD-specific build of
+   PyTorch (and torchvision) from AMD's own official wheel index — the same
+   one Unsloth's official AMD installer uses — overriding anything a prior
+   step may have pulled in from the wrong place. (Some of Unsloth's own
+   dependencies quietly want a generic, non-AMD version of PyTorch; this step
+   exists specifically to correct that back to the AMD-correct one every
+   time. See `CLAUDE.md` if you want the gory details.)
+4. Runs an automatic check at the end that verifies the installed PyTorch and
+   related packages actually ended up at the versions they need to be, and
+   fails loudly right here if not — rather than you discovering it later, mid
+   training run, with a confusing error.
+
+### 3. `devenv up` (or `start-backend` / `start-frontend`) — run it
+
+This starts the actual application: the Python backend server and the web
+frontend, both live-reloading as you edit code. This is the normal
+day-to-day development loop from here on — edit code, see it reload, repeat.
+You don't need to redo steps 1–2 unless the environment definition itself
+changes (a fresh `git pull` that touches this `nix/` directory, for example).
+
+### 4. Ending a session
+
+Exiting the shell (`exit` or Ctrl-D) leaves everything you built and
+downloaded cached locally (in `.devenv/`, which is not version-controlled) —
+the next `devenv shell` on the same machine is fast, because none of steps 1
+or most of step 2 need to happen again.
+
+## The AMD caveat, briefly
+
+NixOS isn't on AMD's list of officially supported operating systems, and the
+ROCm packages this environment uses come from the Nix community, not AMD
+directly. This environment is a convenience for people who already use Nix —
+it is not AMD's or Unsloth's official recommended path (that's the one-line
+installer at [unsloth.ai](https://unsloth.ai/docs/get-started/install/amd)).
+See `DEVENV.md` for what that means in practice and how to tell the
+difference between a bug in this environment and a bug in Unsloth itself.
+
+## Validating changes on real hardware
+
+Because this environment's whole point is to work correctly against a real
+AMD GPU, and that can't be verified in most automated/sandboxed contexts,
+changes to this directory should be checked against actual AMD hardware
+before being trusted. Two purpose-built agents exist for this
+(`.claude/agents/amd-nix-maintainer.md` and `amd-nix-validator.md`) if you're
+working with an AI coding assistant — see `CLAUDE.md` for how they're meant to
+be used together.
