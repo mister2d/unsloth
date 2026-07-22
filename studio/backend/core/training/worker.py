@@ -2235,6 +2235,19 @@ def run_training_process(*, event_queue: Any, stop_queue: Any, config: dict) -> 
         stop_queue: mp.Queue for stop commands from the parent.
         config: Training config dict with all parameters.
     """
+    # Multi-GPU AMD/ROCm hosts have hit a native SIGSEGV inside libamdhip64's
+    # stream teardown (hip::Device::NullStream -> HostQueue::terminate) when
+    # more than one GPU is visible to this process, even though training here
+    # never uses more than one device (Data Parallel GPUs = 1 regardless).
+    # Constrain to a single device before any GPU-touching import runs, unless
+    # the caller already set a visibility var explicitly (e.g. to pick a
+    # non-default GPU). See utils/hardware/amd.py for the same var priority.
+    if sys.platform == "linux" and not any(
+        var in os.environ
+        for var in ("HIP_VISIBLE_DEVICES", "ROCR_VISIBLE_DEVICES", "CUDA_VISIBLE_DEVICES")
+    ):
+        os.environ["HIP_VISIBLE_DEVICES"] = "0"
+
     # Off on Linux (forked datasets map() workers deadlock otherwise); on spawn
     # platforms map() is in-process, so keep tokenizer threads on for faster prep.
     os.environ["TOKENIZERS_PARALLELISM"] = (
