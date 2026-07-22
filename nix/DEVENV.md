@@ -54,18 +54,51 @@ so this is the current blessed fallback even when the ROCm libraries on
 `LD_LIBRARY_PATH` are newer than 7.1. **Revisit this when AMD ships PyTorch
 wheels for ROCm 7.2+** and Unsloth's docs move to a newer tag.
 
-**Install order matters.** Installing `unsloth` (via the requirements files)
-pulls an unpinned CUDA `torch`/`torchvision` from PyPI transitively, which would
-clobber a ROCm torch installed earlier. So `setup-unsloth` installs the
-requirements **first**, then force-reinstalls ROCm `torch torchvision` from the
-index above as the **final** step (`--force-reinstall`). `torchvision` must come
-from the ROCm index too — a plain PyPI `torchvision` drags CUDA `torch` back in.
-Verify the result inside the shell with:
+> **Important caveat — the version-skew tolerance is NOT universal.** The
+> forward-compatibility above applies only to the *userspace runtime `.so`
+> libraries* we surface on `LD_LIBRARY_PATH` (`libamdhip64.so`, `librocblas.so`,
+> …): a `+rocm7.1` wheel `dlopen()`ing 7.2-era runtime `.so`'s is fine. It does
+> **not** apply to *device-libs bitcode* — the AMDGCN bitcode the HIP
+> compiler/JIT backend links into GPU kernels at codegen time, located via the
+> `HIP_DEVICE_LIB_PATH` env var. That is a **different mechanism** and is **not**
+> version-compatible across ROCm releases: a 7.2-era device-libs bitcode set
+> paired with a `+rocm7.1` torch build **deterministically SIGSEGVs at HIP
+> device-init**. `rocmPackages.clr`'s Nix setup-hook leaks `HIP_DEVICE_LIB_PATH`
+> (pointing at nixpkgs' newer device-libs) into the shell — we don't compile any
+> HIP here, so both `flake.nix` (shellHook) and `devenv.nix` (enterShell)
+> **unset** it on entry. If you ever see a segfault at `import torch`/HIP init on
+> a host where the install otherwise succeeded, check `echo $HIP_DEVICE_LIB_PATH`
+> is empty first (see nix/CLAUDE.md failure-mode #9).
+
+**How the ROCm torch is pinned.** Rather than resolving the dependency graph
+live on every shell entry (which was slow and non-deterministic — `torch` would
+resolve to a PyPI CUDA build and had to be force-reinstalled afterward), the
+Python stack is installed from a committed, fully-pinned + hashed lock file,
+`nix/requirements.lock.txt`. In it, `torch`/`torchvision` are pinned to their
+`+rocm7.1` builds from the index above, and `huggingface-hub` is pinned into the
+`>=1.5.0,<2.0` range that `transformers` requires. `setup-unsloth` (and the
+first `devenv shell` entry) install it with a single `uv pip sync`, then swap
+`unsloth` to your local checkout with `uv pip install -e . --no-deps`. Verify
+the result inside the shell with:
 
 ```bash
 python -c "import torch; print(torch.__version__, torch.version.hip, torch.cuda.is_available())"
-# expect a +rocm build, torch.version.hip set, and True on a real AMD host
+# expect a +rocm7.1 build, torch.version.hip set, and True on a real AMD host
 ```
+
+**Regenerating the lock.** The lock is NOT regenerated automatically — repeat
+shell entries with an unchanged lock skip reinstalling anything (that's the
+point). When `studio/backend/requirements/base.txt` or `studio.txt` changes
+upstream, regenerate it from inside the shell:
+
+```bash
+lock-deps          # re-resolves and rewrites nix/requirements.lock.txt
+git diff nix/requirements.lock.txt   # review, confirm torch is still +rocm7.1
+```
+
+then commit the regenerated `nix/requirements.lock.txt`. If upstream bumps the
+required torch version, update the `torch==...+rocm7.1` / `torchvision` pins
+inside the `lock-deps` script (`lockDepsCmd` in `devenv.nix`) first.
 
 > This env intentionally does **not** use the `rocm72-torch291` /
 > `rocm711-torch2100` (etc.) optional-dependency extras in the repo's
@@ -91,6 +124,25 @@ export HSA_OVERRIDE_GFX_VERSION=11.0.0   # example only — use YOUR card's valu
 
 Determine your actual target with `rocminfo | grep gfx` first, and only override
 when you know the ISA you're mapping to.
+
+## `HIP_VISIBLE_DEVICES` — defaults to a single GPU (device 0)
+
+This shell sets `HIP_VISIBLE_DEVICES=0`, pinning every HIP process it spawns to
+one GPU. On multi-GPU hosts, a native crash inside AMD's HIP runtime stream
+teardown has been observed when a process sees more than one GPU, and training
+here does not benefit from multi-GPU visibility anyway (data-parallel GPU count
+is 1 regardless). So the safe default is one GPU.
+
+This is a **default, not a hard lock**. If you deliberately want all GPUs visible
+for your own experimentation, override it *after* entering the shell:
+
+```bash
+export HIP_VISIBLE_DEVICES=0,1   # expose both GPUs
+# or:  unset HIP_VISIBLE_DEVICES  # expose all
+```
+
+(The value is set unconditionally when the shell activates, so your override only
+sticks for the current shell — re-entering resets it to `0`.)
 
 ## Boundary: userspace runtime only (drivers / WSL2 are your responsibility)
 
@@ -150,9 +202,10 @@ echo $DEVICE_TYPE   # -> hip
 
 | Script | Description |
 | :--- | :--- |
-| `setup-unsloth` | Full studio setup: npm install/build, then install the ROCm PyTorch wheel + Unsloth into the managed venv |
+| `setup-unsloth` | Force a full (re)setup: npm install/build, then `uv pip sync` the locked ROCm PyTorch + Unsloth stack into the managed venv (bypasses the up-to-date marker) |
 | `start-backend` | Start the FastAPI backend (`studio/backend/run.py`) |
 | `start-frontend` | Start the Vite dev server for the UI |
+| `lock-deps` | Regenerate `nix/requirements.lock.txt` from the upstream requirements files (maintainers only; commit the result) |
 
 ## Linting and Formatting
 

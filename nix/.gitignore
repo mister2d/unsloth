@@ -7,6 +7,12 @@
 .pre-commit-config.yaml
 
 # devenv.lock and flake.lock ARE tracked (pinned inputs for reproducibility).
+# requirements.lock.txt IS tracked (the pinned Python closure; see DEVENV.md).
+
+# Transient override file written by the `lock-deps` script while regenerating
+# requirements.lock.txt; normally removed at the end of that run. Ignored so a
+# failed/interrupted regen never leaves it staged.
+lock-override.txt
 
 # Per-user/per-host real-AMD-GPU validation target for amd-nix-validator.
 # Local convenience only — never commit a specific hostname.

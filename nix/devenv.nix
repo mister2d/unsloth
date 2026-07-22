@@ -23,6 +23,127 @@ let
     hipblas
     rocm-smi
   ];
+
+  # Shared, gated Python-stack installer used by BOTH enterShell and
+  # setup-unsloth so the two never drift. Expects REPO_ROOT and VENV_PYTHON to
+  # already be set by the caller. Honors $FORCE_INSTALL=1 to bypass the
+  # up-to-date marker (setup-unsloth sets it; enterShell does not).
+  #
+  # This replaces the former 5-step "install then clobber-then-correct" sequence
+  # (5 independent `uv pip install` calls that each re-resolved against live
+  # PyPI, bouncing fsspec/filelock/huggingface-hub between versions every shell
+  # entry). Now it's ONE deterministic `uv pip sync` against the committed,
+  # fully-pinned+hashed nix/requirements.lock.txt, then a single `-e . --no-deps`
+  # to swap unsloth to the local editable source without perturbing the locked
+  # graph. Gated on a content hash of the lock stored under $DEVENV_STATE so
+  # repeat shell entries with an unchanged lock skip the install entirely.
+  # See nix/CLAUDE.md failure-mode catalog #7/#8.
+  installPyStack = ''
+    LOCK_FILE="$REPO_ROOT/nix/requirements.lock.txt"
+    MARKER="$DEVENV_STATE/.py-deps.lockhash"
+    LOCK_HASH="$(sha256sum "$LOCK_FILE" | cut -d' ' -f1)"
+    need=0
+    [ "''${FORCE_INSTALL:-0}" = "1" ] && need=1
+    # This need-check must answer only "is unsloth installed?" — it must NOT
+    # `import unsloth`, because enterShell runs mid-splice: devenv interleaves
+    # rocmPackages.clr's setup-hook env exports around the enterShell hook's own
+    # commands, so at this line the ROCm env is only PARTIALLY assembled (an
+    # inconsistent intermediate state, not merely a missing/extra var). Actually
+    # importing unsloth initializes the GPU during that incomplete splice and
+    # SIGSEGVs — which used to force need=1 and defeat the fast-skip on every 2nd
+    # entry. `importlib.util.find_spec` locates the module WITHOUT executing it:
+    # no GPU/HIP init, immune to the splice-timing state. (The post-install
+    # verification gate below still actually imports torch to confirm the env is
+    # correct — but it runs after the splice completes.) See nix/CLAUDE.md #9.
+    #
+    # `-I` (isolated mode) is REQUIRED for correctness, not just hygiene: enterShell
+    # `cd`s to REPO_ROOT before this runs, and REPO_ROOT contains the `unsloth/`
+    # source dir + `unsloth.egg-info`. Python puts cwd on sys.path, so WITHOUT -I
+    # `find_spec('unsloth')` resolves to that in-tree source and reports "installed"
+    # even when unsloth is genuinely absent from the venv — a false positive that
+    # wrongly skips reinstalling and leaves a broken venv with an intact marker.
+    # -I drops cwd/PYTHONPATH/user-site from sys.path while KEEPING the venv's own
+    # site-packages (derived from the interpreter location, unaffected by -I), so
+    # the probe checks what's actually installed. (-I also happens to harden GPU
+    # init, on top of find_spec never executing the module.)
+    "$VENV_PYTHON" -I -c "import importlib.util, sys; sys.exit(0 if importlib.util.find_spec('unsloth') else 1)" >/dev/null 2>&1 || need=1
+    { [ -f "$MARKER" ] && [ "$(cat "$MARKER")" = "$LOCK_HASH" ]; } || need=1
+    if [ "$need" = "1" ]; then
+      echo "Installing locked Python stack (uv pip sync nix/requirements.lock.txt)..."
+      # The marker is written ONLY if sync + editable install + verification ALL
+      # succeed (the &&-chain below). Without this, a failed sync used to fall
+      # through and still write the marker — recording a broken install as
+      # "complete" and, worse, leaving the fast-skip path unreachable (the next
+      # entry recomputes need=1 via the failing `import unsloth` and just re-runs
+      # the same failing sync). No `set -e`/`return`/`exit` here: this snippet is
+      # sourced in enterShell (where `exit` would drop the user's shell) but run
+      # as a standalone script in setup-unsloth (where `return` is an error), so
+      # an &&-chain is the one form that behaves correctly in both.
+      #
+      # --index-strategy unsafe-best-match is REQUIRED here (not just at compile
+      # time): the lock spans PyPI + the ROCm wheel index, and some packages
+      # (e.g. certifi) exist on both at different versions. uv's default
+      # first-index-wins can't reconcile that and fails with "No solution found";
+      # unsafe-best-match lets it pick the locked version across both indexes.
+      #
+      # --no-deps on the editable keeps every locked version intact instead of
+      # letting uv re-resolve/perturb the graph. The verification gate is
+      # defense-in-depth against a future lock regression (failure-mode #3/#4/#6):
+      # assert torch is a ROCm build and huggingface-hub is in transformers'
+      # required >=1.5.0,<2.0 range. Single-line python avoids `-c` indent issues.
+      if uv pip sync --python "$VENV_PYTHON" --index-strategy unsafe-best-match "$LOCK_FILE" \
+         && uv pip install --python "$VENV_PYTHON" -e "$REPO_ROOT" --no-deps \
+         && "$VENV_PYTHON" -c "import torch, huggingface_hub; assert torch.version.hip is not None, f'torch is not a ROCm build: {torch.__version__}'; hf_ver = tuple(int(p) for p in huggingface_hub.__version__.split('.')[:2]); assert (1, 5) <= hf_ver < (2, 0), f'huggingface-hub {huggingface_hub.__version__} does not satisfy >=1.5.0,<2.0'; print(f'[nix/devenv] verified torch={torch.__version__} huggingface_hub={huggingface_hub.__version__}')"; then
+        echo "$LOCK_HASH" > "$MARKER"
+      else
+        echo "ERROR: Python stack install failed — NOT marking as complete. Fix the error above and re-run 'setup-unsloth' (or re-enter the shell)." >&2
+      fi
+    else
+      echo "Python stack already installed and lock unchanged — skipping install."
+    fi
+  '';
+
+  # Regenerate nix/requirements.lock.txt from the upstream requirements files.
+  # Run manually (and commit the result) whenever studio/backend/requirements/*.txt
+  # changes upstream — this is an amd-nix-maintainer maintenance task, NOT
+  # something that happens automatically on shell entry. See nix/CLAUDE.md and
+  # nix/DEVENV.md. The torch/torchvision +rocm7.1 pins in the override are what
+  # force those two off the ROCm wheel index (uv's index priority alone does not
+  # reliably pick the ROCm build over the PyPI one); bump them here when upstream
+  # moves to a newer torch. The huggingface-hub override forces past studio.txt's
+  # stale ==0.36.2 exact pin (transformers require_version()s >=1.5.0,<2.0).
+  #
+  # --no-emit-package triton is load-bearing on AMD: torch's ROCm wheel depends
+  # on `triton-rocm` while unsloth/unsloth-zoo/cut-cross-entropy depend on plain
+  # `triton`, and BOTH own the `triton/` import path. Shipping both in the lock
+  # installs them concurrently with no deterministic winner, yielding a MIXED
+  # on-disk layout (e.g. `triton/_utils.py` from triton-rocm 3.6.0 but
+  # `triton/experimental/gluon/` from triton 3.7.1) that top-level `import triton`
+  # hides but that breaks the first real training kernel with
+  # `ImportError: cannot import name 'apply_with_path' from 'triton._utils'`.
+  # Excluding plain `triton` leaves `triton-rocm` as the sole provider of the
+  # `triton` module — the correct ROCm build. See failure-mode catalog #8.
+  lockDepsCmd = ''
+    REPO_ROOT="$(cd "$DEVENV_ROOT/.." && pwd)"
+    VENV_PYTHON="$DEVENV_STATE/venv/bin/python"
+    cd "$REPO_ROOT"
+    printf 'huggingface-hub>=1.5.0,<2.0\ntorch==2.10.0+rocm7.1\ntorchvision==0.25.0+rocm7.1\n' > nix/lock-override.txt
+    UV_PYTHON_DOWNLOADS=never uv pip compile \
+      --python "$VENV_PYTHON" \
+      --no-header \
+      --index-url https://pypi.org/simple \
+      --extra-index-url https://download.pytorch.org/whl/rocm7.1 \
+      --index-strategy unsafe-best-match \
+      --override nix/lock-override.txt \
+      --no-emit-package unsloth \
+      --no-emit-package triton \
+      --emit-index-url \
+      --generate-hashes \
+      --output-file nix/requirements.lock.txt \
+      studio/backend/requirements/base.txt studio/backend/requirements/studio.txt
+    rm -f nix/lock-override.txt
+    echo "Wrote nix/requirements.lock.txt — review and commit it (see nix/CLAUDE.md maintenance notes)."
+  '';
 in {
   # ── Packages ───────────────────────────────────────────────────────────
   packages = with pkgs; [
@@ -66,6 +187,21 @@ in {
     # pkgs.zstd supplies libzstd.so.1, which torch's ROCm C extension dlopens at
     # import (without it: "ImportError: libzstd.so.1: cannot open shared object file").
     LD_LIBRARY_PATH = lib.makeLibraryPath (rocmLibs ++ [ pkgs.zstd "/run/opengl-driver" ]);
+
+    # Pin every HIP process spawned in this shell to a single GPU. This host has
+    # 2 visible AMD GPUs, and a native SIGSEGV inside libamdhip64's stream
+    # teardown (hip::Device::NullStream() -> HostQueue::terminate() ->
+    # ReferenceCountedObject::release()) has been hit in two independent code
+    # paths whenever both GPUs are visible to a process: the training subprocess
+    # (since fixed in studio/backend/core/training/worker.py) and a bare
+    # `import unsloth` in the enterShell guard below. Training never benefits
+    # from multi-GPU visibility here anyway (Data Parallel GPUs = 1 even with 2
+    # visible), so default the whole shell to one GPU rather than patching each
+    # call site. Kept in parity with flake.nix's mkShell env. This is a default,
+    # not a hard lock: a user who wants both GPUs for their own experimentation
+    # can `export HIP_VISIBLE_DEVICES=0,1` (or unset it) after entering the
+    # shell. See nix/CLAUDE.md failure-mode #7 and DEVENV.md.
+    HIP_VISIBLE_DEVICES = "0";
   };
 
   # ── Git hooks ──────────────────────────────────────────────────────────
@@ -85,26 +221,12 @@ in {
     cd "$REPO_ROOT"
     # Ensure frontend is built
     (cd studio/frontend && { [ -d node_modules ] || npm install; } && npm run build)
-    # Python stack. Install the Unsloth requirements FIRST — they pull `unsloth`
-    # from PyPI, which drags in an unpinned CUDA torch + torchvision transitively;
-    # that CUDA torch is transient and discarded by the final step below.
-    uv pip install --python "$VENV_PYTHON" -r studio/backend/requirements/base.txt
-    uv pip install --python "$VENV_PYTHON" -r studio/backend/requirements/studio.txt
-    uv pip install --python "$VENV_PYTHON" -e .
-    # Authoritative, LAST: force the ROCm torch + torchvision from AMD's prebuilt
-    # wheel index, overwriting whatever CUDA build the requirements pulled in.
-    # torchvision must also come from the ROCm index or plain torchvision drags
-    # CUDA torch back in transitively. No PyTorch wheels exist for ROCm 7.2+ yet,
-    # so rocm7.1 is the current blessed tag (see DEVENV.md).
-    uv pip install --python "$VENV_PYTHON" torch torchvision --index-url https://download.pytorch.org/whl/rocm7.1 --upgrade --force-reinstall
-    # studio.txt pins a stale huggingface-hub==0.36.2 that clobbers the modern
-    # one base.txt resolved; transformers require_version()s >=1.5.0,<2.0 at
-    # import. Same clobber-then-correct pattern as torch: fix it as the last step.
-    uv pip install --python "$VENV_PYTHON" "huggingface-hub>=1.5.0,<2.0" --upgrade
-    # Verification gate: assert the authoritative package state and fail loudly
-    # rather than let a broken env silently start (see failure-mode catalog #3/#4/#6).
-    # Single-line python (semicolons) avoids leading-indent sensitivity of `-c`.
-    "$VENV_PYTHON" -c "import torch, huggingface_hub; assert torch.version.hip is not None, f'torch is not a ROCm build: {torch.__version__}'; hf_ver = tuple(int(p) for p in huggingface_hub.__version__.split('.')[:2]); assert (1, 5) <= hf_ver < (2, 0), f'huggingface-hub {huggingface_hub.__version__} does not satisfy >=1.5.0,<2.0'; print(f'[nix/devenv] verified torch={torch.__version__} huggingface_hub={huggingface_hub.__version__}')"
+    # Python stack: single deterministic `uv pip sync` of the committed lock,
+    # then swap unsloth to the local editable source. setup-unsloth is the
+    # explicit "(re)do the setup" command, so it forces a reinstall regardless of
+    # the up-to-date marker; enterShell (below) honors the marker to stay fast.
+    FORCE_INSTALL=1
+    ${installPyStack}
   '';
 
   scripts."start-backend".exec = ''
@@ -120,12 +242,26 @@ in {
     npm run dev
   '';
 
+  # Regenerate nix/requirements.lock.txt after upstream requirements changes.
+  # Manual + commit the result; see lockDepsCmd's comment and nix/CLAUDE.md.
+  scripts."lock-deps".exec = lockDepsCmd;
+
   # ── Processes ──────────────────────────────────────────────────────────
   processes.backend.exec = "start-backend";
   processes.frontend.exec = "start-frontend";
 
   # ── Shell ──────────────────────────────────────────────────────────────
   enterShell = ''
+    # rocmPackages.clr's Nix setup-hook exports HIP_DEVICE_LIB_PATH at nixpkgs'
+    # rocm-device-libs bitcode (7.2-era). We compile no HIP code here (only
+    # dlopen runtime .so's for the pip-installed +rocm7.1 torch), and a
+    # device-libs *bitcode* version skew (7.2 bitcode vs the wheel's bundled 7.1)
+    # deterministically SIGSEGVs at HIP device-init — a DIFFERENT mechanism from
+    # the LD_LIBRARY_PATH runtime-.so skew, which IS fine. enterShell runs after
+    # the setup-hook, so this unset reliably clears the leak. Kept in parity with
+    # flake.nix's shellHook. See DEVENV.md and nix/CLAUDE.md failure-mode #9.
+    unset HIP_DEVICE_LIB_PATH
+
     echo "╔══════════════════════════════════════╗"
     echo "║   Unsloth Dev Shell (AMD / ROCm)     ║"
     echo "╚══════════════════════════════════════╝"
@@ -164,31 +300,19 @@ in {
       (cd "$REPO_ROOT/studio/frontend" && npm install)
     fi
 
-    # Install the Python stack into the managed venv if unsloth is missing.
-    # Requirements FIRST (they pull a transient CUDA torch/torchvision from PyPI),
-    # then force the ROCm torch + torchvision LAST so the final torch is ROCm, not
-    # the CUDA build the requirements dragged in transitively.
-    if ! "$VENV_PYTHON" -c "import unsloth" &>/dev/null; then
-      echo "Initializing backend dependencies into managed venv..."
-      uv pip install --python "$VENV_PYTHON" -r "$REPO_ROOT/studio/backend/requirements/base.txt"
-      uv pip install --python "$VENV_PYTHON" -r "$REPO_ROOT/studio/backend/requirements/studio.txt"
-      uv pip install --python "$VENV_PYTHON" -e "$REPO_ROOT"
-      uv pip install --python "$VENV_PYTHON" torch torchvision --index-url https://download.pytorch.org/whl/rocm7.1 --upgrade --force-reinstall
-      # studio.txt pins a stale huggingface-hub==0.36.2 that clobbers the modern
-      # one base.txt resolved; transformers require_version()s >=1.5.0,<2.0 at
-      # import. Same clobber-then-correct pattern as torch: fix it as the last step.
-      uv pip install --python "$VENV_PYTHON" "huggingface-hub>=1.5.0,<2.0" --upgrade
-      # Verification gate: assert the authoritative package state and fail loudly
-      # rather than let a broken env silently start (see failure-mode catalog #3/#4/#6).
-      # Single-line python (semicolons) avoids leading-indent sensitivity of `-c`.
-      "$VENV_PYTHON" -c "import torch, huggingface_hub; assert torch.version.hip is not None, f'torch is not a ROCm build: {torch.__version__}'; hf_ver = tuple(int(p) for p in huggingface_hub.__version__.split('.')[:2]); assert (1, 5) <= hf_ver < (2, 0), f'huggingface-hub {huggingface_hub.__version__} does not satisfy >=1.5.0,<2.0'; print(f'[nix/devenv] verified torch={torch.__version__} huggingface_hub={huggingface_hub.__version__}')"
-    fi
+    # Install/refresh the Python stack. installPyStack is gated: it runs only
+    # when unsloth is missing OR the committed lock's content hash differs from
+    # the marker under $DEVENV_STATE, so a repeat `devenv shell` with an
+    # unchanged lock skips reinstalling anything. (FORCE_INSTALL is unset here,
+    # so the marker is honored — setup-unsloth sets it to force a reinstall.)
+    ${installPyStack}
 
     echo ""
     echo "Available scripts:"
-    echo "  setup-unsloth  - Run the full setup (frontend build + ROCm python stack)"
+    echo "  setup-unsloth  - Force a full (re)setup (frontend build + ROCm python stack)"
     echo "  start-backend  - Start the studio backend"
     echo "  start-frontend - Start the studio frontend"
+    echo "  lock-deps      - Regenerate nix/requirements.lock.txt (maintainers; commit result)"
     echo ""
     echo "To start everything at once, run: devenv up"
   '';

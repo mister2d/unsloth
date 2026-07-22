@@ -77,12 +77,27 @@
           HIP_PATH = "${rocm.clr}";
           LD_LIBRARY_PATH = rocmRuntimeLibs;
 
+          # Pin every HIP process spawned in this shell to a single GPU. This
+          # host has 2 visible AMD GPUs, and a native SIGSEGV inside
+          # libamdhip64's stream teardown (hip::Device::NullStream() ->
+          # HostQueue::terminate() -> ReferenceCountedObject::release()) has
+          # been hit — in two independent code paths — whenever both GPUs are
+          # visible to a process (the training subprocess, since fixed in
+          # worker.py, and a bare `import unsloth` in devenv.nix's enterShell
+          # guard). Training never benefits from multi-GPU visibility here
+          # anyway (Data Parallel GPUs = 1 even with 2 visible), so we default
+          # the whole shell to one GPU instead of patching each call site. This
+          # is a default, not a hard lock: a user who wants both GPUs for their
+          # own experimentation can `export HIP_VISIBLE_DEVICES=0,1` (or unset
+          # it) after entering the shell. See nix/CLAUDE.md failure-mode #7.
+          HIP_VISIBLE_DEVICES = "0";
+
           # HSA_OVERRIDE_GFX_VERSION is intentionally NOT set: it is
           # hardware-specific (it spoofs the gfx arch reported to ROCm for GPUs
           # the shipped libraries don't natively target). The correct value
           # depends on the user's exact GPU, so they must set it themselves if
-          # their card needs it. Likewise HIP_VISIBLE_DEVICES /
-          # ROCR_VISIBLE_DEVICES / CUDA_VISIBLE_DEVICES are left to the user/CI.
+          # their card needs it. Likewise ROCR_VISIBLE_DEVICES /
+          # CUDA_VISIBLE_DEVICES are left to the user/CI.
 
           # All packages above have non-restrictive licenses (verified for clr,
           # rocblas, hipblas, rocm-smi, rocminfo), so allowUnfree is NOT needed.
@@ -92,6 +107,20 @@
           # gates which packages the shell provides: this flake is
           # unconditionally AMD-only and does no hardware-detection branching.
           shellHook = ''
+            # rocmPackages.clr (and friends) ship a Nix setup-hook that exports
+            # HIP_DEVICE_LIB_PATH pointing at nixpkgs' rocm-device-libs bitcode
+            # (currently the 7.2-era 22.0.0-rocm build). That's for people who
+            # COMPILE HIP code against the nix toolchain — we don't: we only
+            # dlopen runtime .so's for the pip-installed prebuilt +rocm7.1 torch.
+            # A device-libs *bitcode* version skew (7.2 bitcode vs the torch
+            # wheel's bundled 7.1) is NOT compatible the way the runtime .so's
+            # are, and deterministically SIGSEGVs at HIP device-init. Unlike the
+            # setup-hook, this `unset` runs LAST (shellHook is after all setup
+            # hooks), so it reliably clears the leak. See DEVENV.md's "why
+            # rocm7.1 wheel" note and nix/CLAUDE.md failure-mode #9. Kept in
+            # parity with devenv.nix's enterShell.
+            unset HIP_DEVICE_LIB_PATH
+
             if [ -e /dev/kfd ]; then
               echo "AMD KFD device found"
               rocminfo | grep gfx || true
