@@ -1,0 +1,5229 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "unsloth-amd-devenv-shell",
+      "name": "unsloth-studio-amd-devenv-shell",
+      "description": "Nix/system layer of the Unsloth Studio AMD/ROCm devenv: the transitive store-path closure of the flake's devShell (dev tooling + ROCm runtime libraries). The Python ML stack is NOT here - see the sibling SBOM nix/sbom-python.cdx.json."
+    },
+    "properties": [
+      {
+        "name": "nix:nixpkgs-commit",
+        "value": "5b2c2d84341b2afb5647081c1386a80d7a8d8605"
+      },
+      {
+        "name": "nix:flake-ref",
+        "value": "github:NixOS/nixpkgs/5b2c2d84341b2afb5647081c1386a80d7a8d8605"
+      },
+      {
+        "name": "unsloth:sbom-layer",
+        "value": "nix-system"
+      },
+      {
+        "name": "unsloth:sibling-sbom",
+        "value": "nix/sbom-python.cdx.json"
+      },
+      {
+        "name": "unsloth:purl-note",
+        "value": "no standard pkg:nix PackageURL scheme exists; components carry no purl and are identified by name+version plus the nix:store-path / nix:output-hash properties (the exact provenance) instead"
+      }
+    ],
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "nix path-info",
+          "description": "closure enumeration (nix path-info -r --json)"
+        },
+        {
+          "type": "application",
+          "name": "unsloth-nix-sbom",
+          "description": "in-repo Nix->CycloneDX generator, run by the lock-deps devenv script"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/02c66kqigmk1rn7dsnazd7f8i6kwjdip-ngtcp2-1.19.0-dev",
+      "name": "ngtcp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/02c66kqigmk1rn7dsnazd7f8i6kwjdip-ngtcp2-1.19.0-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "02c66kqigmk1rn7dsnazd7f8i6kwjdip"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-6WjlM3Q0Rk565f8LuBqPRD/yFH1juOwh+JUOir1UDvk="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.19.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0550j0i8bmzxbcnzrg1g51zigj7y12ih-bash-interactive-5.3p9",
+      "name": "bash-interactive",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0550j0i8bmzxbcnzrg1g51zigj7y12ih-bash-interactive-5.3p9"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0550j0i8bmzxbcnzrg1g51zigj7y12ih"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-jcnZK83QHqf4OF5ZAZOwg/n6EK10+uq881WXhtWpCoA="
+        }
+      ],
+      "version": "5.3p9"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/096brbmyz3rbwi7rzlnmncd0n0bmf49s-perl5.42.0-WWW-RobotRules-6.02",
+      "name": "perl5.42.0-WWW-RobotRules",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/096brbmyz3rbwi7rzlnmncd0n0bmf49s-perl5.42.0-WWW-RobotRules-6.02"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "096brbmyz3rbwi7rzlnmncd0n0bmf49s"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-NTqOOWbP5+Y/Q2YDbCJzr8N5pI2esMoE+5K3p50ucjc="
+        }
+      ],
+      "version": "6.02"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0bk0rj2qqfpwnaqgqiz0qbdnmp5mjkh9-curl-8.18.0",
+      "name": "curl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0bk0rj2qqfpwnaqgqiz0qbdnmp5mjkh9-curl-8.18.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0bk0rj2qqfpwnaqgqiz0qbdnmp5mjkh9"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-YLiBBAPBKGCo338hT4gPHMUdxfFW8wRjb/XmjZmhqYc="
+        }
+      ],
+      "version": "8.18.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0j30s2yjgcvss2qxzgbr13i5q7pan60l-nghttp2-1.67.1-dev",
+      "name": "nghttp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0j30s2yjgcvss2qxzgbr13i5q7pan60l-nghttp2-1.67.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0j30s2yjgcvss2qxzgbr13i5q7pan60l"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-TcP3Ill/g/pLcRJZiZObYTNUU48mSNguQPZNrcWC7/4="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.67.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0nyjdyh436pva8b8268riqfszsnd28j5-simdutf-6.5.0",
+      "name": "simdutf",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0nyjdyh436pva8b8268riqfszsnd28j5-simdutf-6.5.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0nyjdyh436pva8b8268riqfszsnd28j5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-P5qtwROxlEYoyoZ2Xr3o41kxBJ32Up3zP9CNFOjT19w="
+        }
+      ],
+      "version": "6.5.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0xqajqmp5wkl1pjm6xvpryd7hq2jqx6f-perl5.42.0-Mozilla-CA-20230821",
+      "name": "perl5.42.0-Mozilla-CA",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0xqajqmp5wkl1pjm6xvpryd7hq2jqx6f-perl5.42.0-Mozilla-CA-20230821"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0xqajqmp5wkl1pjm6xvpryd7hq2jqx6f"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-UFBdDBWK2McFrbcxwFilLEanxyZZnI2M8VATQeoY6PY="
+        }
+      ],
+      "version": "20230821"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0xw6y53ijaqwfd9c99wyaqiinychzv1f-gnumake-4.4.1",
+      "name": "gnumake",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0xw6y53ijaqwfd9c99wyaqiinychzv1f-gnumake-4.4.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0xw6y53ijaqwfd9c99wyaqiinychzv1f"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Yk9lE8JajnCykTYZ1Uf/VrSzpNO4l5Zq5i+MSog9MA0="
+        }
+      ],
+      "version": "4.4.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng-no-broken-symlinks.sh",
+      "name": "no-broken-symlinks.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng-no-broken-symlinks.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-1JWwvafXMkWBWP7fn+TdHLPAb1dy/YjStDYtG0VmNxM="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/1m0z4ixir10fg7ba7g131js04bxgv265-cmake-4.1.2",
+      "name": "cmake",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/1m0z4ixir10fg7ba7g131js04bxgv265-cmake-4.1.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "1m0z4ixir10fg7ba7g131js04bxgv265"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-syjIpv/ehHzO8pMmxkG88AU3N+wARUoSc4wqXuNLibs="
+        }
+      ],
+      "version": "4.1.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/1nv3i8mpypy3d516f4pd95m0w72r73jy-pkg-config-wrapper-0.29.2",
+      "name": "pkg-config-wrapper",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/1nv3i8mpypy3d516f4pd95m0w72r73jy-pkg-config-wrapper-0.29.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "1nv3i8mpypy3d516f4pd95m0w72r73jy"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-2z6h+0MgC1VT+mhWsRxSST8rVh0EWZKBn35r5u1AdV4="
+        }
+      ],
+      "version": "0.29.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/1p14m1hrdkykyxs0l6wg7y29ahppcnsr-openssl-3.6.1-dev",
+      "name": "openssl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/1p14m1hrdkykyxs0l6wg7y29ahppcnsr-openssl-3.6.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "1p14m1hrdkykyxs0l6wg7y29ahppcnsr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-tGsZgsGyPjdVhGT5gI+hMlQhKFz41dODoPOxZED9HdY="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "3.6.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/1xakvg5jqmaiawwk0n1sbhvsvrdya512-libunistring-1.4.1",
+      "name": "libunistring",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/1xakvg5jqmaiawwk0n1sbhvsvrdya512-libunistring-1.4.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "1xakvg5jqmaiawwk0n1sbhvsvrdya512"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-pIl4G8n63q2JT3/AKnriPc7lUD3nbc+NnEZpfiqXG5w="
+        }
+      ],
+      "version": "1.4.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/21fbccim7r77ppvnl0mgbwj16djx1qpa-libxext-1.3.7",
+      "name": "libxext",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/21fbccim7r77ppvnl0mgbwj16djx1qpa-libxext-1.3.7"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "21fbccim7r77ppvnl0mgbwj16djx1qpa"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ka71RMh0HhEmwUtb+AkWDOVeF/6si56dSkMGwcQpqsU="
+        }
+      ],
+      "version": "1.3.7"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/25h01lplynxf9s0yh75brdhxzcjv4kzp-linux-headers-6.18.7",
+      "name": "linux-headers",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/25h01lplynxf9s0yh75brdhxzcjv4kzp-linux-headers-6.18.7"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "25h01lplynxf9s0yh75brdhxzcjv4kzp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-xIRkZIiT//hDCWsVyz7RY3rSoCk8nVbP7B5VRa5hs8s="
+        }
+      ],
+      "version": "6.18.7"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/27fx8p4k6098wan3zahdbyj79ndcn03z-xz-5.8.2-bin",
+      "name": "xz",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/27fx8p4k6098wan3zahdbyj79ndcn03z-xz-5.8.2-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "27fx8p4k6098wan3zahdbyj79ndcn03z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Hf9+AER+35eqn0xMNqxmvPmeCXDpsjdZDTHAu/LPqVA="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "5.8.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/2c48s343k15i0cmwb9cp1vi6randmzcw-glibc-2.42-51-bin",
+      "name": "glibc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/2c48s343k15i0cmwb9cp1vi6randmzcw-glibc-2.42-51-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "2c48s343k15i0cmwb9cp1vi6randmzcw"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Rotjbe78SIDrkbb68uED/6meb56RF2sWPuxXObAIeGc="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "2.42-51"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/2fa59ncv5slad0mm3fkf8pmjy98w0bpn-fmt-12.1.0",
+      "name": "fmt",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/2fa59ncv5slad0mm3fkf8pmjy98w0bpn-fmt-12.1.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "2fa59ncv5slad0mm3fkf8pmjy98w0bpn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-yGFJ+AkiA8girdb359/Hn7ODLnxC4QmkuYD6Eu23uWY="
+        }
+      ],
+      "version": "12.1.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/2hjsch59amjs3nbgh7ahcfzm2bfwl8zi-bash-5.3p9",
+      "name": "bash",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/2hjsch59amjs3nbgh7ahcfzm2bfwl8zi-bash-5.3p9"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "2hjsch59amjs3nbgh7ahcfzm2bfwl8zi"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-OuHVaUuiY3WGvDUF0rlY2vhsNWOwgCmRZeTK/cjgSgg="
+        }
+      ],
+      "version": "5.3p9"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/2qfd7pvbwjhzx112x5w161q063z3qfyx-clr-7.2.0",
+      "name": "clr",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/2qfd7pvbwjhzx112x5w161q063z3qfyx-clr-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "2qfd7pvbwjhzx112x5w161q063z3qfyx"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-sMDu8bXjuIDkm9O+SJhPrOdad1NuchQnViGRLI0g418="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/2x1cp5cq2k71i5yk3gwijwzqgvp00m1v-perl5.42.0-Test-Needs-0.002010",
+      "name": "perl5.42.0-Test-Needs",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/2x1cp5cq2k71i5yk3gwijwzqgvp00m1v-perl5.42.0-Test-Needs-0.002010"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "2x1cp5cq2k71i5yk3gwijwzqgvp00m1v"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-YJeib+4dT5CSQq+HWm0yheICw3LEeePB6EMgITA7YAI="
+        }
+      ],
+      "version": "0.002010"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/38bhsc4kzxd47z36mmzr2410mq1zc5i4-libssh2-1.11.1",
+      "name": "libssh2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/38bhsc4kzxd47z36mmzr2410mq1zc5i4-libssh2-1.11.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "38bhsc4kzxd47z36mmzr2410mq1zc5i4"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-r6n4Th1pmIO9nCKSKdlDgEs1Bz7/yzk78zpvtivAnyw="
+        }
+      ],
+      "version": "1.11.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/3ia5765yl4xgyrfpc3xmaa7mphc481jl-perl5.42.0-Encode-Locale-1.05",
+      "name": "perl5.42.0-Encode-Locale",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/3ia5765yl4xgyrfpc3xmaa7mphc481jl-perl5.42.0-Encode-Locale-1.05"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "3ia5765yl4xgyrfpc3xmaa7mphc481jl"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Uygwuwzr0l8SRAIwyQ9NZeV7k0OE9KI7k3yHsgePuaA="
+        }
+      ],
+      "version": "1.05"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/3nlzlnpqa7fsbx4f0sdd642cjw4rysa6-binutils-2.44-lib",
+      "name": "binutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/3nlzlnpqa7fsbx4f0sdd642cjw4rysa6-binutils-2.44-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "3nlzlnpqa7fsbx4f0sdd642cjw4rysa6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-vinNLvm4VJp66KM8sjkQ0tjChyoHFSOXZJ3e6rGxw5M="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "2.44"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/3qxhjpkx1yb7aqyk3cqx0j2dy5zy9gdn-perl5.42.0-LWP-MediaTypes-6.04",
+      "name": "perl5.42.0-LWP-MediaTypes",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/3qxhjpkx1yb7aqyk3cqx0j2dy5zy9gdn-perl5.42.0-LWP-MediaTypes-6.04"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "3qxhjpkx1yb7aqyk3cqx0j2dy5zy9gdn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-mU8/yqzGK6F8rYdXAT4D2HEGdNmUIO6jnMMG6gAJ9HM="
+        }
+      ],
+      "version": "6.04"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/3rr54wwd3246s39mc3z9jzyj9577ik9z-libidn2-2.3.8-bin",
+      "name": "libidn2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/3rr54wwd3246s39mc3z9jzyj9577ik9z-libidn2-2.3.8-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "3rr54wwd3246s39mc3z9jzyj9577ik9z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-UPfANgfj/NDVVydxA6ThEFEY1n2EyvrwPE68XCWWwwY="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "2.3.8"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/3y8jfnbcv230kip514qh2wmfifihzvqp-brotli-1.2.0",
+      "name": "brotli",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/3y8jfnbcv230kip514qh2wmfifihzvqp-brotli-1.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "3y8jfnbcv230kip514qh2wmfifihzvqp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-9QDIeTJPrH5UM1oB6WyDXEs0KrU34adCHYW/lscht8I="
+        }
+      ],
+      "version": "1.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/3z4n8rmy4cfp0km5jaczz7f404j9sa64-gmp-with-cxx-6.3.0",
+      "name": "gmp-with-cxx",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/3z4n8rmy4cfp0km5jaczz7f404j9sa64-gmp-with-cxx-6.3.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "3z4n8rmy4cfp0km5jaczz7f404j9sa64"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-4OFIi93O3JgN/AfPLYkFyfqcXOfz+tS1V1Pd+ctOBK4="
+        }
+      ],
+      "version": "6.3.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/455a388x4ny03373s1wajannpflpj25r-libuv-1.51.0-dev",
+      "name": "libuv",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/455a388x4ny03373s1wajannpflpj25r-libuv-1.51.0-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "455a388x4ny03373s1wajannpflpj25r"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-3A855TPXgG59lPT3A+Q481bXgCbo3MnckYzKmFl5GP0="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.51.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/4g2q10kbj49j0cpyal731ilca7d78z6z-nghttp2-1.67.1-lib",
+      "name": "nghttp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/4g2q10kbj49j0cpyal731ilca7d78z6z-nghttp2-1.67.1-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "4g2q10kbj49j0cpyal731ilca7d78z6z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Hmb1cj2RMmGPAK7AlNRGlahlpq4d8nIuWi0tQ7CWEmI="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "1.67.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/4l601nzx49j1p1m7p65jdjdbhb110dif-python3.13-virtualenv-20.36.1",
+      "name": "python3.13-virtualenv",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/4l601nzx49j1p1m7p65jdjdbhb110dif-python3.13-virtualenv-20.36.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "4l601nzx49j1p1m7p65jdjdbhb110dif"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-kZKchWesROQrd+Uuma8PzbkQHReglutoPzaZb09/IXc="
+        }
+      ],
+      "version": "20.36.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/4pfrhja4j3j5g4iwssn9w43sgihdf4wl-perl-5.42.0",
+      "name": "perl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/4pfrhja4j3j5g4iwssn9w43sgihdf4wl-perl-5.42.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "4pfrhja4j3j5g4iwssn9w43sgihdf4wl"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Bris6H5+vmUlSngRb8E88l0wWc2ncg4lR1MGZNhwG74="
+        }
+      ],
+      "version": "5.42.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/4siii6hvzs9ymbq37k04vcpx6xnybz21-ninja-1.13.2",
+      "name": "ninja",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/4siii6hvzs9ymbq37k04vcpx6xnybz21-ninja-1.13.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "4siii6hvzs9ymbq37k04vcpx6xnybz21"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-egNrP5ORkTnDjJY+vMfEtYa2X0prgx/gkKWlAdMsQrY="
+        }
+      ],
+      "version": "1.13.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/4yi6jj75bb5hhdzpzlxfyf69d35wsf2x-binutils-wrapper-2.44",
+      "name": "binutils-wrapper",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/4yi6jj75bb5hhdzpzlxfyf69d35wsf2x-binutils-wrapper-2.44"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "4yi6jj75bb5hhdzpzlxfyf69d35wsf2x"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-gQtsbfkpLd1qcM6apQg/1MiLeBzu6EI3bdNvJTSBh9Y="
+        }
+      ],
+      "version": "2.44"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/50bwm2f9bzx1vn4fbn2azgx76pqngzc2-curl-8.18.0-bin",
+      "name": "curl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/50bwm2f9bzx1vn4fbn2azgx76pqngzc2-curl-8.18.0-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "50bwm2f9bzx1vn4fbn2azgx76pqngzc2"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Qd5d8gOuA+SNyFABOyX+tr6ZDa1J9Ri0Pedtyur3LvM="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "8.18.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/54wrxi0bgxyvqmyyfcvfm17qlf600yjs-tzdata-2025c",
+      "name": "tzdata",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/54wrxi0bgxyvqmyyfcvfm17qlf600yjs-tzdata-2025c"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "54wrxi0bgxyvqmyyfcvfm17qlf600yjs"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Mnp3iYRtAWJQCG+ipKGgfq3WMj//G0FhQ7hRB+s8hmI="
+        }
+      ],
+      "version": "2025c"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/588hnj4f64i2bbdjk1mjzif778dk4zp4-elfutils-0.194",
+      "name": "elfutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/588hnj4f64i2bbdjk1mjzif778dk4zp4-elfutils-0.194"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "588hnj4f64i2bbdjk1mjzif778dk4zp4"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-C7uBrnWCMinxoN/KhyDbctH/pzirTD73Ef0qg7ThPZc="
+        }
+      ],
+      "version": "0.194"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/590yx3aynyhs48jyk8ip37fk1mjqfhkb-patchelf-0.15.2",
+      "name": "patchelf",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/590yx3aynyhs48jyk8ip37fk1mjqfhkb-patchelf-0.15.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "590yx3aynyhs48jyk8ip37fk1mjqfhkb"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-sWSSQFO/2USY+mYW7XCtsqVgGtej5mZnSIJHgkc4/CE="
+        }
+      ],
+      "version": "0.15.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5ciif1nws6k0maxdpw2rqryqsxdd0ams-perl5.42.0-File-Listing-6.16",
+      "name": "perl5.42.0-File-Listing",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5ciif1nws6k0maxdpw2rqryqsxdd0ams-perl5.42.0-File-Listing-6.16"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5ciif1nws6k0maxdpw2rqryqsxdd0ams"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-eVo9zwoF5bu6AugNlR23fdCM3yapMTdWPiCqyuu62WE="
+        }
+      ],
+      "version": "6.16"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5cp0vlc6kabxzk17q7jjwmwg6p7mjg3b-expand-response-params",
+      "name": "expand-response-params",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5cp0vlc6kabxzk17q7jjwmwg6p7mjg3b-expand-response-params"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5cp0vlc6kabxzk17q7jjwmwg6p7mjg3b"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-+ZOn0v3TfYbC7PrAIqe2D4h9cQ63vU5UNdLZ5gMyYzs="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5fbl6akdzpj1dac4sfdyd6vsn5g4adgk-rocm-runtime-7.2.0",
+      "name": "rocm-runtime",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5fbl6akdzpj1dac4sfdyd6vsn5g4adgk-rocm-runtime-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5fbl6akdzpj1dac4sfdyd6vsn5g4adgk"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-xQWFEykkPjp4EASP3/+JMSh6pt/a8Qtawn9UXBF3LRo="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5gdq3sr468lnvzqd5zv712lqgsv0lgmc-source",
+      "name": "source",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5gdq3sr468lnvzqd5zv712lqgsv0lgmc-source"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5gdq3sr468lnvzqd5zv712lqgsv0lgmc"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LCtdPnE+rJU/ccI1PTFDMPNXxgl1GrRgc5z7LjOw3zA="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5gmx4ls0l2jq468j179z0ncp6l4g9gjj-nghttp3-1.14.0",
+      "name": "nghttp3",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5gmx4ls0l2jq468j179z0ncp6l4g9gjj-nghttp3-1.14.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5gmx4ls0l2jq468j179z0ncp6l4g9gjj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LH26XwXg0PorWCV8NBbYZQ3gUj8xmdgC7lTBP1wo55A="
+        }
+      ],
+      "version": "1.14.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5j4mx4vckmmms2spy8x8kqjxcb12kpf5-sqlite-3.51.2-dev",
+      "name": "sqlite",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5j4mx4vckmmms2spy8x8kqjxcb12kpf5-sqlite-3.51.2-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5j4mx4vckmmms2spy8x8kqjxcb12kpf5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ZP3CnD4eTZpf8kBFzDDDa59VhX8QnKLRbMxntaoAV/o="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "3.51.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5mnq195cx3cagnpbbvf5ncbp4fjgy0sz-libffi-3.5.2",
+      "name": "libffi",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5mnq195cx3cagnpbbvf5ncbp4fjgy0sz-libffi-3.5.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5mnq195cx3cagnpbbvf5ncbp4fjgy0sz"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-goX0FuYFAefntYEguSq0Jz5SX5U/ao27noX41oD6ixc="
+        }
+      ],
+      "version": "3.5.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5qrvz1d1f813wcw6b752d4daaqxxbd1r-ncurses-6.6",
+      "name": "ncurses",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5qrvz1d1f813wcw6b752d4daaqxxbd1r-ncurses-6.6"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5qrvz1d1f813wcw6b752d4daaqxxbd1r"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-jQlRzu8kJy+V8fksJkvim5Muno8DAPpSynHqxTCBoDQ="
+        }
+      ],
+      "version": "6.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh",
+      "name": "move-docs.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "5yzw0vhkyszf2d179m0qfkgxmp5wjjx4"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LFXKr+/5UKMCEYyEpyotSs23Xr0Vwhzlv6YGyO/dqzI="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/635qp27ryiksnnrpd8152lw31w7l82fv-nodejs-slim-22.22.1-npm",
+      "name": "nodejs-slim",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/635qp27ryiksnnrpd8152lw31w7l82fv-nodejs-slim-22.22.1-npm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "635qp27ryiksnnrpd8152lw31w7l82fv"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-O0Zq0q5XQT7ezzSXgAru5HzSwsdyX2E39XeVfOewELE="
+        },
+        {
+          "name": "nix:output",
+          "value": "npm"
+        }
+      ],
+      "version": "22.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/68c9nshhpmv29p2wpb3yyjj2f48acaf5-libxau-1.0.12",
+      "name": "libxau",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/68c9nshhpmv29p2wpb3yyjj2f48acaf5-libxau-1.0.12"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "68c9nshhpmv29p2wpb3yyjj2f48acaf5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LpzbmLZdgz3x78YPP4oqv5mocP2UK8sENypPDH6iXFg="
+        }
+      ],
+      "version": "1.0.12"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6c4rf088dx600pykzzaqhkwlgyzis2jr-rocminfo-7.2.0",
+      "name": "rocminfo",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6c4rf088dx600pykzzaqhkwlgyzis2jr-rocminfo-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6c4rf088dx600pykzzaqhkwlgyzis2jr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-pQ8Gi6pMaX/YwDqrEHRYXSM6lJACYsdl47IDAkggBac="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6g92fqnx6cwza2243r78p7rqmay8ssik-libdrm-2.4.131-dev",
+      "name": "libdrm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6g92fqnx6cwza2243r78p7rqmay8ssik-libdrm-2.4.131-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6g92fqnx6cwza2243r78p7rqmay8ssik"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-TYxFv45mjPJflwvJlgbbL2q4r4lQ6ZhWO7OkF5rUVNg="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "2.4.131"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6ihhdz5frv36dasbabsihfv987ha2cpi-perl5.42.0-HTTP-Daemon-6.16",
+      "name": "perl5.42.0-HTTP-Daemon",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6ihhdz5frv36dasbabsihfv987ha2cpi-perl5.42.0-HTTP-Daemon-6.16"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6ihhdz5frv36dasbabsihfv987ha2cpi"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-nhIQkzWVEP+i4XvKh5NLP7m4k7pjNsn3hmzI1WCZcAo="
+        }
+      ],
+      "version": "6.16"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6k38kk69g0c627mk0jcz8dvgbvj461d6-perl5.42.0-HTML-Parser-3.81",
+      "name": "perl5.42.0-HTML-Parser",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6k38kk69g0c627mk0jcz8dvgbvj461d6-perl5.42.0-HTML-Parser-3.81"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6k38kk69g0c627mk0jcz8dvgbvj461d6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-jOYtVLLSWomutGNCqXwQuSIC9Nh/R4ai2AN5slEwxPM="
+        }
+      ],
+      "version": "3.81"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6myhsg4shn6wvqbh0dznqr5y39sm16a9-libarchive-3.8.4-lib",
+      "name": "libarchive",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6myhsg4shn6wvqbh0dznqr5y39sm16a9-libarchive-3.8.4-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6myhsg4shn6wvqbh0dznqr5y39sm16a9"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-A8kiIKyXTc9k8j8+ZB4i/o20R+qfyrSen81hYzFe58s="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "3.8.4"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6w6ri8gyxgvmsl2pcvp0p183ys07wrdm-ada-3.4.2",
+      "name": "ada",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6w6ri8gyxgvmsl2pcvp0p183ys07wrdm-ada-3.4.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6w6ri8gyxgvmsl2pcvp0p183ys07wrdm"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-sCZmMZuvR2xTN2yBiUwUDoJjis8wyhKMjCfq74e3+i0="
+        }
+      ],
+      "version": "3.4.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/6xi8bdxaxwqpigy27kxlbz3g44p6j11j-lsb_release",
+      "name": "lsb_release",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/6xi8bdxaxwqpigy27kxlbz3g44p6j11j-lsb_release"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "6xi8bdxaxwqpigy27kxlbz3g44p6j11j"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-8tI0AW0zc7rgm92OekstUyg/k6dV1Ko6tgjX8JFR6TU="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/770zwl4ighcvb166mlvdzwjzpmnawd7m-python3.13-ukkonen-1.1.0",
+      "name": "python3.13-ukkonen",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/770zwl4ighcvb166mlvdzwjzpmnawd7m-python3.13-ukkonen-1.1.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "770zwl4ighcvb166mlvdzwjzpmnawd7m"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-smvy3xaSg7mwSdhdnhL/Ntclt2M0elgfIw7ydyaiBGs="
+        }
+      ],
+      "version": "1.1.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/7qb2ak72cnd85rgjlsg2v7jkrf382s4y-gdbm-1.26-lib",
+      "name": "gdbm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/7qb2ak72cnd85rgjlsg2v7jkrf382s4y-gdbm-1.26-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "7qb2ak72cnd85rgjlsg2v7jkrf382s4y"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-fL96OGBXSxkSaSTkBKli3P4E8VcnVhH4IZSDc/G5n+s="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "1.26"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/7ssfvw8z4ylzjkw73z1y78svbhkdlkvb-attr-2.5.2",
+      "name": "attr",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/7ssfvw8z4ylzjkw73z1y78svbhkdlkvb-attr-2.5.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "7ssfvw8z4ylzjkw73z1y78svbhkdlkvb"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-aPa548m1M82TgebYp4xZE8L6v2LpFhHVJeSShOqsClY="
+        }
+      ],
+      "version": "2.5.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/7sw72wv1qa215pjaa07h0nzf5xgnkhmm-gcc-prefix",
+      "name": "gcc-prefix",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/7sw72wv1qa215pjaa07h0nzf5xgnkhmm-gcc-prefix"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "7sw72wv1qa215pjaa07h0nzf5xgnkhmm"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-xyGvNMdvkZG66PF1L10w+NMVgNd9l8ESE+8fpT/Ocbg="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/7zgq0585s33nqhf05j4qh4iwzp7sk6rj-perl5.42.0-HTTP-CookieJar-0.014",
+      "name": "perl5.42.0-HTTP-CookieJar",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/7zgq0585s33nqhf05j4qh4iwzp7sk6rj-perl5.42.0-HTTP-CookieJar-0.014"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "7zgq0585s33nqhf05j4qh4iwzp7sk6rj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-yAB6Xth95VPXxXsIyFfOL0zg3ap69YYtWI2o2HsqCk0="
+        }
+      ],
+      "version": "0.014"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/84rbbk45fal6gqxmxh06ky2n42k6vqfp-libuv-1.51.0",
+      "name": "libuv",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/84rbbk45fal6gqxmxh06ky2n42k6vqfp-libuv-1.51.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "84rbbk45fal6gqxmxh06ky2n42k6vqfp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-aoRNo5U9lY8UgQuLm8XLoKdFGNol9JWB8hXLhXJkA+k="
+        }
+      ],
+      "version": "1.51.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/85clx3b0xkdf58jn161iy80y5223ilbi-compress-man-pages.sh",
+      "name": "compress-man-pages.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/85clx3b0xkdf58jn161iy80y5223ilbi-compress-man-pages.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "85clx3b0xkdf58jn161iy80y5223ilbi"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-bjlqmt1KnFZ3MjGVNk+Zn4QCY09e4oIVW1vOb0kc3Ag="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/87y9237m9c9m9mxk9ajwdfmn78vz6w2y-zlib-1.3.1-dev",
+      "name": "zlib",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/87y9237m9c9m9mxk9ajwdfmn78vz6w2y-zlib-1.3.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "87y9237m9c9m9mxk9ajwdfmn78vz6w2y"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-hPjk8p/Q+WBzwNZeoKiBwfv93eDNjaZCpMS7eN29H5M="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.3.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/8c61qqsgvj8k8l0dw7ar6ni40az1vdg6-c-ares-1.34.6",
+      "name": "c-ares",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/8c61qqsgvj8k8l0dw7ar6ni40az1vdg6-c-ares-1.34.6"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "8c61qqsgvj8k8l0dw7ar6ni40az1vdg6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-7oigC/G/1JNs5CwffaJb0lBT5mJixzxt9aNN8+0/ypw="
+        }
+      ],
+      "version": "1.34.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/8laf6k81j9ckylrigj3xsk76j69knhvl-gnugrep-3.12",
+      "name": "gnugrep",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/8laf6k81j9ckylrigj3xsk76j69knhvl-gnugrep-3.12"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "8laf6k81j9ckylrigj3xsk76j69knhvl"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-XWAhx0OCoygUh+QUaKmIhPxAKW7jZLys9m6MKbs6CeA="
+        }
+      ],
+      "version": "3.12"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/8nlwlm79f2phsybyhy2dj0zpcfsjk5qy-libedit-20251016-3.1",
+      "name": "libedit",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/8nlwlm79f2phsybyhy2dj0zpcfsjk5qy-libedit-20251016-3.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "8nlwlm79f2phsybyhy2dj0zpcfsjk5qy"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-tNkVsKFjgK+DIggyY4JwOiWgFJXYcpujIojH7VBpPh0="
+        }
+      ],
+      "version": "20251016-3.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/8r1dl5avizg0qs395d0rgbnynxmn6ybg-mailcap-2.1.54",
+      "name": "mailcap",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/8r1dl5avizg0qs395d0rgbnynxmn6ybg-mailcap-2.1.54"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "8r1dl5avizg0qs395d0rgbnynxmn6ybg"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-/2pkdgHKodEDLknYROnuSN0F17m+BZ4AymO51vBpcvU="
+        }
+      ],
+      "version": "2.1.54"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/8x49w8i0vafv34rlc6h4a0f7z0z2qpb5-git-2.53.0",
+      "name": "git",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/8x49w8i0vafv34rlc6h4a0f7z0z2qpb5-git-2.53.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "8x49w8i0vafv34rlc6h4a0f7z0z2qpb5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-MjvpVOzkn7o1zGJPiJRJgPX8wRDEYbgf0t63QBjDLhk="
+        }
+      ],
+      "version": "2.53.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/8y5jm97n4lyw80gh71yihghbhqc11fdz-patch-2.8",
+      "name": "patch",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/8y5jm97n4lyw80gh71yihghbhqc11fdz-patch-2.8"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "8y5jm97n4lyw80gh71yihghbhqc11fdz"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-wSQdMdFewDuaiyU+QxEQzLixN2JzYYIBxBf22+vx6T0="
+        }
+      ],
+      "version": "2.8"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/9143jqjsvsk2z802d69a4njiz9a42wrs-pytest-check-hook",
+      "name": "pytest-check-hook",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/9143jqjsvsk2z802d69a4njiz9a42wrs-pytest-check-hook"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "9143jqjsvsk2z802d69a4njiz9a42wrs"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ykNLTdcZnYEtSVWZlyswnhKi6OyqJ4R1F6WoRxA9Es4="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/97db2qpzcx9f0ab2ny8krfx59mcjrp21-perl5.42.0-libnet-3.15",
+      "name": "perl5.42.0-libnet",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/97db2qpzcx9f0ab2ny8krfx59mcjrp21-perl5.42.0-libnet-3.15"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "97db2qpzcx9f0ab2ny8krfx59mcjrp21"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-QtHH1Lv+hhfAzWtrj114vTDKTp7KWUvp9U5ojlY+2Es="
+        }
+      ],
+      "version": "3.15"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/97rn2wpm09db8278qzjvbss9ybxhfsxf-gcc-15.2.0-libgcc",
+      "name": "gcc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/97rn2wpm09db8278qzjvbss9ybxhfsxf-gcc-15.2.0-libgcc"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "97rn2wpm09db8278qzjvbss9ybxhfsxf"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ybGbR9/CFzBGJlVKPwuPUc2i4mk0sQZ09YY9Zru0tl4="
+        }
+      ],
+      "version": "15.2.0-libgcc"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/9dkfjmalih6fgfq0cmjz4ihhykx9vmaq-c-ares-1.34.6",
+      "name": "c-ares",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/9dkfjmalih6fgfq0cmjz4ihhykx9vmaq-c-ares-1.34.6"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "9dkfjmalih6fgfq0cmjz4ihhykx9vmaq"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-5B4KhvPaEIvE5+abjrq87xWCrrB75ar+fazh34nIhrA="
+        }
+      ],
+      "version": "1.34.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/9nmzd62x45ayp4vmswvn6z45h6bzrsla-binutils-2.44",
+      "name": "binutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/9nmzd62x45ayp4vmswvn6z45h6bzrsla-binutils-2.44"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "9nmzd62x45ayp4vmswvn6z45h6bzrsla"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-qo86kAkI+nopW+Nj1Gi2foQ95HBJRIXkaoshuskijD8="
+        }
+      ],
+      "version": "2.44"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/9nww32bprhg1rr1qj423xdr5mwnqk93z-openssl-3.6.1-bin",
+      "name": "openssl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/9nww32bprhg1rr1qj423xdr5mwnqk93z-openssl-3.6.1-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "9nww32bprhg1rr1qj423xdr5mwnqk93z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-3/HzGe9EQv2KE4jvsFLsshMvkFk1qJZ7m+Tq/t1WMpM="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "3.6.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/aaa7ja0i8hjmgvx6c435h5bm5l8d2jyj-krb5-1.22.1",
+      "name": "krb5",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/aaa7ja0i8hjmgvx6c435h5bm5l8d2jyj-krb5-1.22.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "aaa7ja0i8hjmgvx6c435h5bm5l8d2jyj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-qiSLO+RNuy6C9wS0Q9YjFL8gNAB3eDjULGmMvni9XQs="
+        }
+      ],
+      "version": "1.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ad630z5lkrrirwjrz8z8ymrzgklqjqdl-perl5.42.0-Net-SMTP-SSL-1.04",
+      "name": "perl5.42.0-Net-SMTP-SSL",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ad630z5lkrrirwjrz8z8ymrzgklqjqdl-perl5.42.0-Net-SMTP-SSL-1.04"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ad630z5lkrrirwjrz8z8ymrzgklqjqdl"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-/yMVNG5uQrMKYJMnwrx7tv/AF7xqPPJY0aOF/POeLlQ="
+        }
+      ],
+      "version": "1.04"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/amk391kqipcpcx00d0vkff8xj4rlj3p5-clang-22.0.0-rocm-lib",
+      "name": "clang",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/amk391kqipcpcx00d0vkff8xj4rlj3p5-clang-22.0.0-rocm-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "amk391kqipcpcx00d0vkff8xj4rlj3p5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-21cjE4maGLRcr89twwh7ttA1jl1+YqdIJO7mTdb0gnk="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ans4y7j70iwwa1xvck2vjzzi2iknx4h1-expat-2.7.4",
+      "name": "expat",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ans4y7j70iwwa1xvck2vjzzi2iknx4h1-expat-2.7.4"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ans4y7j70iwwa1xvck2vjzzi2iknx4h1"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-TtWuqq4cecJY2kx9KSHxqrnrzDQRXsIoO4FgnbSmjYM="
+        }
+      ],
+      "version": "2.7.4"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ayf03q5rd7b71g7j661zcshlvpn7xd6z-ccache-4.13.1",
+      "name": "ccache",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ayf03q5rd7b71g7j661zcshlvpn7xd6z-ccache-4.13.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ayf03q5rd7b71g7j661zcshlvpn7xd6z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-qpHpVQXy6mtw/Bl+IVJQZ610gWSO8OytT9U0cRbecT8="
+        }
+      ],
+      "version": "4.13.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/b3rx5wac9hhfxn9120xkcvdwj51mc9z2-findutils-4.10.0",
+      "name": "findutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/b3rx5wac9hhfxn9120xkcvdwj51mc9z2-findutils-4.10.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "b3rx5wac9hhfxn9120xkcvdwj51mc9z2"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-XU1dY49Ew4RybF1+w3S6wQFAPRi8KMtg5YiU0hpIwps="
+        }
+      ],
+      "version": "4.10.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/b47mzz2v88r4cig6y15p5ff1r6dsdakm-rocm-core-7.2.0",
+      "name": "rocm-core",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/b47mzz2v88r4cig6y15p5ff1r6dsdakm-rocm-core-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "b47mzz2v88r4cig6y15p5ff1r6dsdakm"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-HCo7p06efJHAKrA5NBjaREzmAoK2XL6CKeHDs6hJol4="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/bgm2mqsfhp32x2vhxr9rip78bi89z7cb-perl5.42.0-HTTP-Cookies-6.10",
+      "name": "perl5.42.0-HTTP-Cookies",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/bgm2mqsfhp32x2vhxr9rip78bi89z7cb-perl5.42.0-HTTP-Cookies-6.10"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "bgm2mqsfhp32x2vhxr9rip78bi89z7cb"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-z+ftpzYfb1XVfMjXH156/H2oiePU9Mq/l31ITnutenQ="
+        }
+      ],
+      "version": "6.10"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/bwqsixv38h6jcm96965mmahp5hvi6iv7-python3.13-nodeenv-1.10.0",
+      "name": "python3.13-nodeenv",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/bwqsixv38h6jcm96965mmahp5hvi6iv7-python3.13-nodeenv-1.10.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "bwqsixv38h6jcm96965mmahp5hvi6iv7"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-YXTnKdgl/NaxoXPPfZGz1mH4Efqfbe3lnOvD4AVa0C8="
+        }
+      ],
+      "version": "1.10.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/c6gikc2mm148nbb1p776nj3i32asm1nk-python3.13-toml-0.10.2",
+      "name": "python3.13-toml",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/c6gikc2mm148nbb1p776nj3i32asm1nk-python3.13-toml-0.10.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "c6gikc2mm148nbb1p776nj3i32asm1nk"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-5vfPmxX/VrBa0BUdgvY4NiDmmyl/isyStMgPCXTB/tg="
+        }
+      ],
+      "version": "0.10.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/c7642m04gkq6frgf8c14y64s0qfmhiw0-perl5.42.0-HTML-TagCloud-0.38",
+      "name": "perl5.42.0-HTML-TagCloud",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/c7642m04gkq6frgf8c14y64s0qfmhiw0-perl5.42.0-HTML-TagCloud-0.38"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "c7642m04gkq6frgf8c14y64s0qfmhiw0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-k3EgN8lMwIXax6JubT6uEZd2XutfLzVBPe4ZcjUu/Pc="
+        }
+      ],
+      "version": "0.38"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/cc9qkj968x46wz4ycp5i2gg988b8c4g0-python3.13-packaging-25.0",
+      "name": "python3.13-packaging",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/cc9qkj968x46wz4ycp5i2gg988b8c4g0-python3.13-packaging-25.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "cc9qkj968x46wz4ycp5i2gg988b8c4g0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-AJA7flw05NIAhHW0EYpab3QJl9/ZeR03XWPFs+sZpJA="
+        }
+      ],
+      "version": "25.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/cickvswrvann041nqxb0rxilc46svw1n-prune-libtool-files.sh",
+      "name": "prune-libtool-files.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/cickvswrvann041nqxb0rxilc46svw1n-prune-libtool-files.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "cickvswrvann041nqxb0rxilc46svw1n"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-0DC4P4/oI7F2AJ/9K6MUMNP818Ol4i+fvpJt3D2HyJs="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/cmzya9irvxzlkh7lfy6i82gbp0saxqj3-multiple-outputs.sh",
+      "name": "multiple-outputs.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/cmzya9irvxzlkh7lfy6i82gbp0saxqj3-multiple-outputs.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "cmzya9irvxzlkh7lfy6i82gbp0saxqj3"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-9xd9l6/GeN1DX0xqIZtdJltbBaUBOAJAuFIlvdduqRc="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/cp06sh2y41rfb0pcs71wxz654088cls1-nghttp3-1.14.0-dev",
+      "name": "nghttp3",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/cp06sh2y41rfb0pcs71wxz654088cls1-nghttp3-1.14.0-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "cp06sh2y41rfb0pcs71wxz654088cls1"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-jFAqa71UIhHsccXexXEQV8T/eX7nkMo1xoL1OogVs2Q="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.14.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/cv1d7p48379km6a85h4zp6kr86brh32q-audit-tmpdir.sh",
+      "name": "audit-tmpdir.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/cv1d7p48379km6a85h4zp6kr86brh32q-audit-tmpdir.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "cv1d7p48379km6a85h4zp6kr86brh32q"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-GtEGPN4Le2tf2sgAKyRLpL3GoMHaZ1HFfYCgXVEv8Ko="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/cx6rkgzyiqyj73dhyqm673l3dy6d7syh-perl5.42.0-Digest-HMAC-1.05",
+      "name": "perl5.42.0-Digest-HMAC",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/cx6rkgzyiqyj73dhyqm673l3dy6d7syh-perl5.42.0-Digest-HMAC-1.05"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "cx6rkgzyiqyj73dhyqm673l3dy6d7syh"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-cNy2VvCGJcqRue3/PvghyLOsir8QKfnhiD+RTLxN5WM="
+        }
+      ],
+      "version": "1.05"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/d2231a3r3fgc0a40fx8ym82k162bajhj-readline-8.3p3",
+      "name": "readline",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/d2231a3r3fgc0a40fx8ym82k162bajhj-readline-8.3p3"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "d2231a3r3fgc0a40fx8ym82k162bajhj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-X28uDzXLU+gXUc0h8+5We9/2LOrQE0opqqKWd+pbFNw="
+        }
+      ],
+      "version": "8.3p3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/dajq3vl5b2x5ld7wxiizcf3xss2dj5fy-nghttp2-1.67.1",
+      "name": "nghttp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/dajq3vl5b2x5ld7wxiizcf3xss2dj5fy-nghttp2-1.67.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "dajq3vl5b2x5ld7wxiizcf3xss2dj5fy"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-t/JdtaBiguviAS9SRxbnvtNUss6rEL60EYSPDGpGBRo="
+        }
+      ],
+      "version": "1.67.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/drsviq2sj4dvbq4c0s6dbfl13sdrlbxv-json-c-0.18",
+      "name": "json-c",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/drsviq2sj4dvbq4c0s6dbfl13sdrlbxv-json-c-0.18"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "drsviq2sj4dvbq4c0s6dbfl13sdrlbxv"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Uc/RMS2nLj6Dg1CBPq+OY0iv5by+BE6yKkKTyM23wxA="
+        }
+      ],
+      "version": "0.18"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/dszpfwzkz14xd19bwm2yhs3cbvkpw88s-zstd-1.5.7-dev",
+      "name": "zstd",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/dszpfwzkz14xd19bwm2yhs3cbvkpw88s-zstd-1.5.7-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "dszpfwzkz14xd19bwm2yhs3cbvkpw88s"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ncBnNmdqcmHgGv72z6xHHNHIfLhebz08RTPy5dowQpM="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.5.7"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/dzpqg7v1zjhf9kncgf4akxisqgx1ralh-hipblas-common-7.2.0",
+      "name": "hipblas-common",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/dzpqg7v1zjhf9kncgf4akxisqgx1ralh-hipblas-common-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "dzpqg7v1zjhf9kncgf4akxisqgx1ralh"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-/wlw2uUH/i9E8rJljgv4Bb4UI+Dvdm7d6QcVJYSQIy8="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/fhs4jyjf8i1x2xrb6rrp7p0hghm1lvr2-openmp-22.0.0-rocm",
+      "name": "openmp",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/fhs4jyjf8i1x2xrb6rrp7p0hghm1lvr2-openmp-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "fhs4jyjf8i1x2xrb6rrp7p0hghm1lvr2"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-f/F7+219fmDMWb/naQpsYTEX3OzVY5j1f876VWAXWns="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/fr16d7av36m5f934i32chs2d76zjm135-perl5.42.0-IO-HTML-1.004",
+      "name": "perl5.42.0-IO-HTML",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/fr16d7av36m5f934i32chs2d76zjm135-perl5.42.0-IO-HTML-1.004"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "fr16d7av36m5f934i32chs2d76zjm135"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-qtVEG1UEA7eE5VtTNl7mboCyzuwQgJQbo1SL2bjMfkw="
+        }
+      ],
+      "version": "1.004"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/frqc9w8q0dxsg7b8w3j0cv1lb9bd6xww-git-2.53.0-doc",
+      "name": "git",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/frqc9w8q0dxsg7b8w3j0cv1lb9bd6xww-git-2.53.0-doc"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "frqc9w8q0dxsg7b8w3j0cv1lb9bd6xww"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-OoXKUnE8JlwPjOttrHFe1Xcqr9FilCe/+3xkVN9e2Bw="
+        },
+        {
+          "name": "nix:output",
+          "value": "doc"
+        }
+      ],
+      "version": "2.53.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/fw2d81ms5a8627ichs9a8fqc5dk9s5gc-keyutils-1.6.3-lib",
+      "name": "keyutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/fw2d81ms5a8627ichs9a8fqc5dk9s5gc-keyutils-1.6.3-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "fw2d81ms5a8627ichs9a8fqc5dk9s5gc"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-4iG5qc2OvbsGVTuM/jKZQUoAFb36k/IeDnn8hiH9Yr8="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "1.6.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/fyaryjvghbkpfnsyw97hb3lyb37s1pd6-move-lib64.sh",
+      "name": "move-lib64.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/fyaryjvghbkpfnsyw97hb3lyb37s1pd6-move-lib64.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "fyaryjvghbkpfnsyw97hb3lyb37s1pd6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-SDQRJiS2AfWlONR8W8dEGuNPeLET7IuPLOm5vQBh2C0="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/g41y5xaagglzx7wzqpi7yrilnirnigg2-perl5.42.0-Clone-0.46",
+      "name": "perl5.42.0-Clone",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/g41y5xaagglzx7wzqpi7yrilnirnigg2-perl5.42.0-Clone-0.46"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "g41y5xaagglzx7wzqpi7yrilnirnigg2"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-FHKFv4qiaP+DQwJmUQq+GPj2xpYFSBrVN3e7YNzjBRc="
+        }
+      ],
+      "version": "0.46"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/g93whx8466047n5r84vd2cyaqxbx5i5i-libxcrypt-4.5.2",
+      "name": "libxcrypt",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/g93whx8466047n5r84vd2cyaqxbx5i5i-libxcrypt-4.5.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "g93whx8466047n5r84vd2cyaqxbx5i5i"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-2MwRLK5iorlsO2y4INrjEBSipWCJSxXX0S4quoTqa/k="
+        }
+      ],
+      "version": "4.5.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/gcd8gxs3dpz7i444x23yz9hjikmy6ij0-perl5.42.0-CGI-4.59",
+      "name": "perl5.42.0-CGI",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/gcd8gxs3dpz7i444x23yz9hjikmy6ij0-perl5.42.0-CGI-4.59"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "gcd8gxs3dpz7i444x23yz9hjikmy6ij0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Kl7T+F6kQG3GJUaOcYRlEUDDWfO8eBRN3nCJBbI3dp0="
+        }
+      ],
+      "version": "4.59"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/gf7b4yz4vhd0y2hnnrimhh875ghwzzzj-gawk-5.3.2",
+      "name": "gawk",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/gf7b4yz4vhd0y2hnnrimhh875ghwzzzj-gawk-5.3.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "gf7b4yz4vhd0y2hnnrimhh875ghwzzzj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-reWlqYIyS0tBoFFwnjwFTzVKl3j79v0s24FJgggzlLM="
+        }
+      ],
+      "version": "5.3.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/gi0p7azcixb20pddx39k5mwnkj6xl4bz-nodejs-22.22.1",
+      "name": "nodejs",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/gi0p7azcixb20pddx39k5mwnkj6xl4bz-nodejs-22.22.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "gi0p7azcixb20pddx39k5mwnkj6xl4bz"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-NUJ237JxJZ4nbGv3q80PtcgBt0tmyHbcLUecNpZjP7s="
+        }
+      ],
+      "version": "22.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/gpsk714mryqn5cqbbb523lgijrmk4mba-libidn2-2.3.8-dev",
+      "name": "libidn2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/gpsk714mryqn5cqbbb523lgijrmk4mba-libidn2-2.3.8-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "gpsk714mryqn5cqbbb523lgijrmk4mba"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-mHwS6MN5IM2PI3c2+vAxaglFPa5+eP3qLkS7kESvSOY="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "2.3.8"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/gz3rknshr1ywis4mjaqrgj3z2shp3n3v-update-autotools-gnu-config-scripts-hook",
+      "name": "update-autotools-gnu-config-scripts-hook",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/gz3rknshr1ywis4mjaqrgj3z2shp3n3v-update-autotools-gnu-config-scripts-hook"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "gz3rknshr1ywis4mjaqrgj3z2shp3n3v"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-VPWheS0zivQkFvKPfTWznhjhASmJNX/atqN+OniytwQ="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/h2dp13b6a2n7rvyqnylwdg3w7kcc3p8p-perl5.42.0-URI-5.21",
+      "name": "perl5.42.0-URI",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/h2dp13b6a2n7rvyqnylwdg3w7kcc3p8p-perl5.42.0-URI-5.21"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "h2dp13b6a2n7rvyqnylwdg3w7kcc3p8p"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-e0hdFfDQ1LPUWn/QXrdT3ww40VzuV5mQPa91gsAaV84="
+        }
+      ],
+      "version": "5.21"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/h8z5hxkx2j9dfnydpz89isjfs619f12q-llhttp-9.3.0",
+      "name": "llhttp",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/h8z5hxkx2j9dfnydpz89isjfs619f12q-llhttp-9.3.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "h8z5hxkx2j9dfnydpz89isjfs619f12q"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Xwqj38bWQ2lqm1PDWbytlUEp1I/P2zHdNSUVl2Lp2Eg="
+        }
+      ],
+      "version": "9.3.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/harqqq4p37lpfj0h57xnwcag9ls0d2fs-expand-response-params",
+      "name": "expand-response-params",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/harqqq4p37lpfj0h57xnwcag9ls0d2fs-expand-response-params"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "harqqq4p37lpfj0h57xnwcag9ls0d2fs"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ifxVA89GcXiSzfJhXpQgtw7bjKCiEZFyVdgFbFoomhM="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hddsa82i6slh4saws93hj7aaaym2ir1b-numactl-2.0.18",
+      "name": "numactl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hddsa82i6slh4saws93hj7aaaym2ir1b-numactl-2.0.18"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hddsa82i6slh4saws93hj7aaaym2ir1b"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-FS2HP7f8M/ZgB5WdZ9Y4isyE0qPM/fH52gSQDsydDWs="
+        }
+      ],
+      "version": "2.0.18"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hhxiw2bdpac5k68axjg6sg92rgna5d3s-hipblaslt-7.2.0",
+      "name": "hipblaslt",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hhxiw2bdpac5k68axjg6sg92rgna5d3s-hipblaslt-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hhxiw2bdpac5k68axjg6sg92rgna5d3s"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-anc6SbqkpfO0nWhYWSqhD1Ixc9NsBGY/9CQFeggxvOQ="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hk5mbqv61b0lmxnmls3anbmn7w4bbg0f-libdrm-2.4.131-bin",
+      "name": "libdrm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hk5mbqv61b0lmxnmls3anbmn7w4bbg0f-libdrm-2.4.131-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hk5mbqv61b0lmxnmls3anbmn7w4bbg0f"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-EM7Ws9aWP+b+MneRZ+HSFyK3bx9nP1tiPUJeQJ1REv8="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "2.4.131"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hkzcd2xwgdcvrm4sf3js67s25xg78f38-llvm-22.0.0-rocm",
+      "name": "llvm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hkzcd2xwgdcvrm4sf3js67s25xg78f38-llvm-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hkzcd2xwgdcvrm4sf3js67s25xg78f38"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-cFg2HOOQFhqf/1CTwEKDPaKRF5Hsz86yaxokEsNvCns="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hlxw2q9qansq7bn52xvlb5badw3z1v8s-coreutils-9.10",
+      "name": "coreutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hlxw2q9qansq7bn52xvlb5badw3z1v8s-coreutils-9.10"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hlxw2q9qansq7bn52xvlb5badw3z1v8s"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-r9BLQDCPE6N4/jkbwa6iMh3RGuhovCN35PXNDUb2cnI="
+        }
+      ],
+      "version": "9.10"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hrfsv4sg3v8h7pd936zlqq60g3qn4imc-jemalloc-5.3.0-unstable-2025-09-12",
+      "name": "jemalloc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hrfsv4sg3v8h7pd936zlqq60g3qn4imc-jemalloc-5.3.0-unstable-2025-09-12"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hrfsv4sg3v8h7pd936zlqq60g3qn4imc"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-6lLEAarwpcEwVkfR4u807k0JNILh4RZ7sC2mZAXlS5w="
+        }
+      ],
+      "version": "5.3.0-unstable-2025-09-12"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hyla1hvyzv75hnx8jrxwvxncmghbca0x-rocm-toolchain",
+      "name": "rocm-toolchain",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hyla1hvyzv75hnx8jrxwvxncmghbca0x-rocm-toolchain"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hyla1hvyzv75hnx8jrxwvxncmghbca0x"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-AIzZ6OkFpd3WzPAEnSHuH22akAxFW0CALwIhj8fopAs="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/hzzhnxds6kxbbafh0nqlr18zncjq1pm9-libxdmcp-1.1.5",
+      "name": "libxdmcp",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/hzzhnxds6kxbbafh0nqlr18zncjq1pm9-libxdmcp-1.1.5"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "hzzhnxds6kxbbafh0nqlr18zncjq1pm9"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Xpea/tWX4nzN5/Hrw4qZEK+jmAem1BATxijN5QSbWM8="
+        }
+      ],
+      "version": "1.1.5"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/i3cgrdgd32m0x4hwhdm080hqsplhmmgy-perl5.42.0-IO-Socket-SSL-2.083",
+      "name": "perl5.42.0-IO-Socket-SSL",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/i3cgrdgd32m0x4hwhdm080hqsplhmmgy-perl5.42.0-IO-Socket-SSL-2.083"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "i3cgrdgd32m0x4hwhdm080hqsplhmmgy"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-FgVvZhMMRMIXCqVZIRdrts58N2bVqR39TU7iRFLDr1c="
+        }
+      ],
+      "version": "2.083"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/i59cbsr9zwy57hp41pa3wg1cbzm0yjpr-curl-8.18.0",
+      "name": "curl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/i59cbsr9zwy57hp41pa3wg1cbzm0yjpr-curl-8.18.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "i59cbsr9zwy57hp41pa3wg1cbzm0yjpr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Ij0pECVhdMXbDOedyCKyQHnlQ0vl74cVJLI89YhMaKo="
+        }
+      ],
+      "version": "8.18.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ibzc4ndh24nnxzihs1ahvvyrr47yn1s8-perl5.42.0-TermReadKey-2.38",
+      "name": "perl5.42.0-TermReadKey",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ibzc4ndh24nnxzihs1ahvvyrr47yn1s8-perl5.42.0-TermReadKey-2.38"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ibzc4ndh24nnxzihs1ahvvyrr47yn1s8"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-WQD2zf4lWEdXBlOzxeY2eKUP147l5cOyjB7pyZ3TqnM="
+        }
+      ],
+      "version": "2.38"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/icrrz26xbyp293kagrlkab1bhc6gra0r-diffutils-3.12",
+      "name": "diffutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/icrrz26xbyp293kagrlkab1bhc6gra0r-diffutils-3.12"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "icrrz26xbyp293kagrlkab1bhc6gra0r"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-CI8htvzVURkN4dOdjhtnICL1VSvVKADk9xS0JBBDdZQ="
+        }
+      ],
+      "version": "3.12"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ifdxnnjqv87326c3h7ybhzvg96hck3qd-simdutf-8.0.0",
+      "name": "simdutf",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ifdxnnjqv87326c3h7ybhzvg96hck3qd-simdutf-8.0.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ifdxnnjqv87326c3h7ybhzvg96hck3qd"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-eHaP04k9nHedEmxdzOT56mpmCBa+Zdxs9cIv4mbfbrI="
+        }
+      ],
+      "version": "8.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ihpdbhy4rfxaixiamyb588zfc3vj19al-gcc-15.2.0-lib",
+      "name": "gcc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ihpdbhy4rfxaixiamyb588zfc3vj19al-gcc-15.2.0-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ihpdbhy4rfxaixiamyb588zfc3vj19al"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-0Omvby28LofXecZaIwxfNM3MMgQ3P/vIX4MXkGGk+eY="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "15.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/il8bpy7kmgvas9ladz7p9fk49548682z-hiredis-1.2.0",
+      "name": "hiredis",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/il8bpy7kmgvas9ladz7p9fk49548682z-hiredis-1.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "il8bpy7kmgvas9ladz7p9fk49548682z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-zOk5IdygbfobZpKLL7sWFkBhN9kbYissVsqlhHPeK0w="
+        }
+      ],
+      "version": "1.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/imbpjbb4icimwdacmb9qdxqhf1359cny-rocsolver-7.2.0",
+      "name": "rocsolver",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/imbpjbb4icimwdacmb9qdxqhf1359cny-rocsolver-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "imbpjbb4icimwdacmb9qdxqhf1359cny"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ha6Cmns11QwFsKxE/uBu3uyIdzsqbodXlmreOVlodao="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/imindlm08wk8n5d0yhmm0ap3gcymqxdk-python3.13-pyyaml-6.0.3",
+      "name": "python3.13-pyyaml",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/imindlm08wk8n5d0yhmm0ap3gcymqxdk-python3.13-pyyaml-6.0.3"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "imindlm08wk8n5d0yhmm0ap3gcymqxdk"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-CVy+ZgaHz62T6PLpz3erArTzw81Pc2rIg8YFGfG0nkU="
+        }
+      ],
+      "version": "6.0.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ir29xib753ljjfkq7m3sncj51pjzd2g0-perl5.42.0-Net-HTTP-6.23",
+      "name": "perl5.42.0-Net-HTTP",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ir29xib753ljjfkq7m3sncj51pjzd2g0-perl5.42.0-Net-HTTP-6.23"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ir29xib753ljjfkq7m3sncj51pjzd2g0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-8bqor20KQAlYvrHbsAXjPSyVi+ega8WGR6MPqtqm0zo="
+        }
+      ],
+      "version": "6.23"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/isva9q9zx3frx6hh6cnpihh1kd2bx6bk-gnutar-1.35",
+      "name": "gnutar",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/isva9q9zx3frx6hh6cnpihh1kd2bx6bk-gnutar-1.35"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "isva9q9zx3frx6hh6cnpihh1kd2bx6bk"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-486yoPg8f0N6+dTz7+44lTp47V6Gik/keSnGr/4jwco="
+        }
+      ],
+      "version": "1.35"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ivf1in5kczdkz186m6xirq0w4y5844r6-rocm-comgr-22.0.0-rocm",
+      "name": "rocm-comgr",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ivf1in5kczdkz186m6xirq0w4y5844r6-rocm-comgr-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ivf1in5kczdkz186m6xirq0w4y5844r6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-o3CZf9N/HdEWAn24ISI1vmrR8oNzblbHt06H+3u/BT0="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/izwgpnz316s2kvd52zwaaqs36hb8fyh3-llvm-binutils-22.0.0-rocm",
+      "name": "llvm-binutils",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/izwgpnz316s2kvd52zwaaqs36hb8fyh3-llvm-binutils-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "izwgpnz316s2kvd52zwaaqs36hb8fyh3"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-VMWrxHK2Ya/2X8zts2U2f1hnx+RHRaSh2lYMZRpDVfU="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j2cwkkf3p5719cikm3l4w03swr2cvj1s-python3.13-platformdirs-4.5.1",
+      "name": "python3.13-platformdirs",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j2cwkkf3p5719cikm3l4w03swr2cvj1s-python3.13-platformdirs-4.5.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j2cwkkf3p5719cikm3l4w03swr2cvj1s"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-XDO233fKFPYvoYtkfewsXjwXI4hzPB0vGN/W7eIe6No="
+        }
+      ],
+      "version": "4.5.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j3hs745klzarm7lrlpsyl8skx5czg0z0-pcre2-10.46",
+      "name": "pcre2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j3hs745klzarm7lrlpsyl8skx5czg0z0-pcre2-10.46"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j3hs745klzarm7lrlpsyl8skx5czg0z0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-kVAIij3KAGNxoQn0nKABdXZjieb3/STvpYiFkF/Sim4="
+        }
+      ],
+      "version": "10.46"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j3m1hkyd8sdw19qzshaw6zj8y6djinyf-libyaml-0.2.5",
+      "name": "libyaml",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j3m1hkyd8sdw19qzshaw6zj8y6djinyf-libyaml-0.2.5"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j3m1hkyd8sdw19qzshaw6zj8y6djinyf"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-NBM3w87Hxnk6UQy0pheM+Qy1ikWv0r3vENFsL5yXhYE="
+        }
+      ],
+      "version": "0.2.5"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j4y4fm69wrv38jn319zl8ncz4hy34kx4-perl5.42.0-CGI-Fast-2.16",
+      "name": "perl5.42.0-CGI-Fast",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j4y4fm69wrv38jn319zl8ncz4hy34kx4-perl5.42.0-CGI-Fast-2.16"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j4y4fm69wrv38jn319zl8ncz4hy34kx4"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-WnfFj3MCzI3hY5sKj+qFJBpC9Pb7iDHhMdq7O/W/Mi8="
+        }
+      ],
+      "version": "2.16"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j5fz28pic24azmxkv183hk6fchfs7ag8-pkg-config-0.29.2",
+      "name": "pkg-config",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j5fz28pic24azmxkv183hk6fchfs7ag8-pkg-config-0.29.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j5fz28pic24azmxkv183hk6fchfs7ag8"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-5PAg/FUFtMWB97VWssO4mNkmr6oNNVXJpggu2r45qUQ="
+        }
+      ],
+      "version": "0.29.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j8irrc0mpx029dw0rmadsjylg7h31ync-glibc-2.42-51-dev",
+      "name": "glibc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j8irrc0mpx029dw0rmadsjylg7h31ync-glibc-2.42-51-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j8irrc0mpx029dw0rmadsjylg7h31ync"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-swdMYoHMGp0E6rcjgwglTyaqq5PhcNpM964Rmc1bOHI="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "2.42-51"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/j9vpn81nc1lq6dj655kdxykxjwvrl1bs-perl5.42.0-HTML-Tagset-3.20",
+      "name": "perl5.42.0-HTML-Tagset",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/j9vpn81nc1lq6dj655kdxykxjwvrl1bs-perl5.42.0-HTML-Tagset-3.20"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "j9vpn81nc1lq6dj655kdxykxjwvrl1bs"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LM2Om9bYdkQiyoQMMmXrC6Whjdy1AMbAVcFyIb+8g/w="
+        }
+      ],
+      "version": "3.20"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ja66iyv96y1cbjhj7fl5ghqqmy9fyacj-python3-3.12.13",
+      "name": "python3",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ja66iyv96y1cbjhj7fl5ghqqmy9fyacj-python3-3.12.13"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ja66iyv96y1cbjhj7fl5ghqqmy9fyacj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-IdNcbhXNH2Dr8Fw6lxo4fxYSI0mnDYFyhX2pHaiQuYU="
+        }
+      ],
+      "version": "3.12.13"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/jmbxnc0r2blyjpivvg3gabz6flyzy3bn-krb5-1.22.1-dev",
+      "name": "krb5",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/jmbxnc0r2blyjpivvg3gabz6flyzy3bn-krb5-1.22.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "jmbxnc0r2blyjpivvg3gabz6flyzy3bn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-BgBnGlKc2aJqvOAEqsnWy+ekQUDzUYci70DP+1lYgZM="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/jsb530apf94w1jd6368jwmz37fdpcnx7-hipblas-7.2.0",
+      "name": "hipblas",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/jsb530apf94w1jd6368jwmz37fdpcnx7-hipblas-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "jsb530apf94w1jd6368jwmz37fdpcnx7"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-j7fqYtHf03AbzFw3Z25yRvJ9BqFARvXASI3ynDIBTcQ="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/k87a0gv4hg1zmm8j5d3ffmxyvhr13i41-sqlite-3.51.2-bin",
+      "name": "sqlite",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/k87a0gv4hg1zmm8j5d3ffmxyvhr13i41-sqlite-3.51.2-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "k87a0gv4hg1zmm8j5d3ffmxyvhr13i41"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-pUIJzGhViABya7As2dvpnUrOXKH6BZoSbUtKex7guUI="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "3.51.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kb42gqlzwln0rw9v00jd5pzsvvrf465l-nix-shell",
+      "name": "nix-shell",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kb42gqlzwln0rw9v00jd5pzsvvrf465l-nix-shell"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kb42gqlzwln0rw9v00jd5pzsvvrf465l"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-vN501hJqvemVwJbb4kCLuH1Do6e3DJ2ViZ7k7aBARUQ="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kbw2j1vag664b3sj3rjwz9v53cqx87sb-gcc-wrapper-15.2.0",
+      "name": "gcc-wrapper",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kbw2j1vag664b3sj3rjwz9v53cqx87sb-gcc-wrapper-15.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kbw2j1vag664b3sj3rjwz9v53cqx87sb"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-nN/ZYTs/5Z2ia7wEeMnoqtGxhjyt4IxLcZfikz9oCgs="
+        }
+      ],
+      "version": "15.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kc3p2klwb34i23y59scgdjxhp54dhxnr-perl5.42.0-Crypt-URandom-0.54",
+      "name": "perl5.42.0-Crypt-URandom",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kc3p2klwb34i23y59scgdjxhp54dhxnr-perl5.42.0-Crypt-URandom-0.54"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kc3p2klwb34i23y59scgdjxhp54dhxnr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-DJEU/4Q7Nz5DBg+IyvvRn7emesnG/QElmWvQ5P0Lc2U="
+        }
+      ],
+      "version": "0.54"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kd0yrsmrslihfp66y2k88cyan1vjydl8-python3.13-pycparser-3.00",
+      "name": "python3.13-pycparser",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kd0yrsmrslihfp66y2k88cyan1vjydl8-python3.13-pycparser-3.00"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kd0yrsmrslihfp66y2k88cyan1vjydl8"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-XPeFtY1SQ16hOpo1nnAfPrOMizEkqDmUwYXXr/nLCk0="
+        }
+      ],
+      "version": "3.00"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kd4xwxjpjxi71jkm6ka0np72if9rm3y0-move-sbin.sh",
+      "name": "move-sbin.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kd4xwxjpjxi71jkm6ka0np72if9rm3y0-move-sbin.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kd4xwxjpjxi71jkm6ka0np72if9rm3y0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-exQDue2oXLDKVrh7CiPpj7WjA5qhZfskrLzpYkAFiy0="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kfb54isrpdnbw5msz5cs120wr7nmff0h-perl5.42.0-FCGI-ProcManager-0.28",
+      "name": "perl5.42.0-FCGI-ProcManager",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kfb54isrpdnbw5msz5cs120wr7nmff0h-perl5.42.0-FCGI-ProcManager-0.28"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kfb54isrpdnbw5msz5cs120wr7nmff0h"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-x0VZ/OWF7c84442T9n6rJWO/sncvpoIFdJzk7QL9/fM="
+        }
+      ],
+      "version": "0.28"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/khd9yb8b0npl5x98y7d5l102v0wp600l-xz-5.8.2",
+      "name": "xz",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/khd9yb8b0npl5x98y7d5l102v0wp600l-xz-5.8.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "khd9yb8b0npl5x98y7d5l102v0wp600l"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Bu6licFItBAT/75/zhXskrWLHUIawxJgeqJbYGJ8eqQ="
+        }
+      ],
+      "version": "5.8.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kk735l9nyb970x8pfkkgawrpwx3kc2dr-nghttp2-1.67.1-lib",
+      "name": "nghttp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kk735l9nyb970x8pfkkgawrpwx3kc2dr-nghttp2-1.67.1-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kk735l9nyb970x8pfkkgawrpwx3kc2dr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Q67jfrvjVaX+JJshyJbD6C6ZEwbwGSlZTAQWnBzZZBA="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "1.67.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/kv08yczy1gkh0qdn4ksm2p01abx5m7iq-nodejs-slim-22.22.1-corepack",
+      "name": "nodejs-slim",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/kv08yczy1gkh0qdn4ksm2p01abx5m7iq-nodejs-slim-22.22.1-corepack"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "kv08yczy1gkh0qdn4ksm2p01abx5m7iq"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-PUcB9GxrmXuWvWuXrYzohrXg/S9FPBPQPHTDxm9MqZk="
+        },
+        {
+          "name": "nix:output",
+          "value": "corepack"
+        }
+      ],
+      "version": "22.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/l0l2ll1lmylczj1ihqn351af2kyp5x19-glibc-2.42-51",
+      "name": "glibc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/l0l2ll1lmylczj1ihqn351af2kyp5x19-glibc-2.42-51"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "l0l2ll1lmylczj1ihqn351af2kyp5x19"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-yqbvucmz+wATX5gGylgpJB9Si1XfPYbu2nk3mkmU1m0="
+        }
+      ],
+      "version": "2.42-51"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/l3150w62gvp42jya8q7syfj72xq30zm9-rhash-1.4.4",
+      "name": "rhash",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/l3150w62gvp42jya8q7syfj72xq30zm9-rhash-1.4.4"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "l3150w62gvp42jya8q7syfj72xq30zm9"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-jt2ykJX12LoLHX37Dxl1IUuOXRpxAZxnizMEnwnRqUg="
+        }
+      ],
+      "version": "1.4.4"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/l3gqwj9zk4xgqv9kxfkvx9qc51m8j8x3-libxml2-2.15.1",
+      "name": "libxml2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/l3gqwj9zk4xgqv9kxfkvx9qc51m8j8x3-libxml2-2.15.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "l3gqwj9zk4xgqv9kxfkvx9qc51m8j8x3"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LoiPqdlZZyRoz1WNxi6hVx9gkpnb2rjNAsbRnQOCT6w="
+        }
+      ],
+      "version": "2.15.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/lcpv5jbr8inqqkkka9li5sh9ic5wd9mp-c-ares-1.34.6-dev",
+      "name": "c-ares",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/lcpv5jbr8inqqkkka9li5sh9ic5wd9mp-c-ares-1.34.6-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "lcpv5jbr8inqqkkka9li5sh9ic5wd9mp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-GiQ4mVAfDG+ptKlESEzV2uEDUM+LMy3tjRGdAHlt/WI="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.34.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/lkl47vib5c59aimgz9f8ryqnpl8i8bqb-python3.13-pytest-9.0.2",
+      "name": "python3.13-pytest",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/lkl47vib5c59aimgz9f8ryqnpl8i8bqb-python3.13-pytest-9.0.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "lkl47vib5c59aimgz9f8ryqnpl8i8bqb"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Ry3FJYdzTM421TIXV+Wp6jO8P/jdwcWqAfejiBsOCtM="
+        }
+      ],
+      "version": "9.0.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/lsifgwpalj0dgnjh6raal9gmvcn6m6s5-uv-0.10.10",
+      "name": "uv",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/lsifgwpalj0dgnjh6raal9gmvcn6m6s5-uv-0.10.10"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "lsifgwpalj0dgnjh6raal9gmvcn6m6s5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Y3hQyvon25fLdXb+pGnShKHF+rc4xCllVO1k+d+BsPQ="
+        }
+      ],
+      "version": "0.10.10"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/lzpkdgqp7wj5b8w54x0iir6b07iscp28-simdjson-4.2.4",
+      "name": "simdjson",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/lzpkdgqp7wj5b8w54x0iir6b07iscp28-simdjson-4.2.4"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "lzpkdgqp7wj5b8w54x0iir6b07iscp28"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-DeyqwJ6mX5qKccQOWViL5DPg5PSd2D7587IdqBFXsMM="
+        }
+      ],
+      "version": "4.2.4"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/m1fw8l8y9ycxh5dzispbb7cwl6rra14l-python3-3.13.12",
+      "name": "python3",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/m1fw8l8y9ycxh5dzispbb7cwl6rra14l-python3-3.13.12"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "m1fw8l8y9ycxh5dzispbb7cwl6rra14l"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-6DK/ib1paKOB/7gVEsLQc3pQvug7qn4ZEAo7izvtAh8="
+        }
+      ],
+      "version": "3.13.12"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/m27kji8vcm9hn8jyn3dxixxkgbs6p0kp-zstd-1.5.7",
+      "name": "zstd",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/m27kji8vcm9hn8jyn3dxixxkgbs6p0kp-zstd-1.5.7"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "m27kji8vcm9hn8jyn3dxixxkgbs6p0kp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-miGrISbnd2zeeBqNpYDuJue+kajerO6WFOZFGxmmoI0="
+        }
+      ],
+      "version": "1.5.7"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/m3b3fnv33pzhhbadwg3qdqpcjvlg83jn-hwdata-0.404",
+      "name": "hwdata",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/m3b3fnv33pzhhbadwg3qdqpcjvlg83jn-hwdata-0.404"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "m3b3fnv33pzhhbadwg3qdqpcjvlg83jn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-m0vi0D+RpifADkIOu9i8tBeIdN6djc9ieqhg84wODx0="
+        }
+      ],
+      "version": "0.404"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/m5z0dbcz2y7r0f3rill6z02msz9b46if-libxcb-1.17.0",
+      "name": "libxcb",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/m5z0dbcz2y7r0f3rill6z02msz9b46if-libxcb-1.17.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "m5z0dbcz2y7r0f3rill6z02msz9b46if"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ZeEDEFWHALSUeQUa4KlUlgS9/HLL7CA2g7FJfoIuZFg="
+        }
+      ],
+      "version": "1.17.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/m8x59ybbd4hycpswc27vj7hjyng7q7w6-brotli-1.2.0-dev",
+      "name": "brotli",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/m8x59ybbd4hycpswc27vj7hjyng7q7w6-brotli-1.2.0-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "m8x59ybbd4hycpswc27vj7hjyng7q7w6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-viZE6AGXfbBYD71T/wxTXhxiBC94ZjM9x6pzyPpWlDA="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/md592gfars4m9madyrpj9yrq5jhckgjf-gettext-0.26",
+      "name": "gettext",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/md592gfars4m9madyrpj9yrq5jhckgjf-gettext-0.26"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "md592gfars4m9madyrpj9yrq5jhckgjf"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-2jv2oSLOZ4rtYmv1O/c6Hh+CggY7JMrGMROLDG3xBMo="
+        }
+      ],
+      "version": "0.26"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/mhbj5wys4v3a3jh134wsh3lg839rpy42-rocm-device-libs-22.0.0-rocm",
+      "name": "rocm-device-libs",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/mhbj5wys4v3a3jh134wsh3lg839rpy42-rocm-device-libs-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "mhbj5wys4v3a3jh134wsh3lg839rpy42"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-4x9a78znDHSoyNH+2/MdhqdfmqIqxCVp53zEBkB6nVo="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/miwl4bsmw04csxwlffzr7p03m6lkmb2y-lld-22.0.0-rocm",
+      "name": "lld",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/miwl4bsmw04csxwlffzr7p03m6lkmb2y-lld-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "miwl4bsmw04csxwlffzr7p03m6lkmb2y"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-pI4aHVlRdH/O7x32M8RFMCSfeitVo03ojS6hUXGwRRY="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/mkvhaz128287v2ncd7fa7w8a16sxb1nn-perl5.42.0-TimeDate-2.33",
+      "name": "perl5.42.0-TimeDate",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/mkvhaz128287v2ncd7fa7w8a16sxb1nn-perl5.42.0-TimeDate-2.33"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "mkvhaz128287v2ncd7fa7w8a16sxb1nn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-tq2cFU6m+rP2gADcAlmrF1oUtMG464JP/Kblqd4CwUI="
+        }
+      ],
+      "version": "2.33"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/mwn4zy4zxhxhcpbc7a2p5fv0za3x7bwl-llvm-22.0.0-rocm-lib",
+      "name": "llvm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/mwn4zy4zxhxhcpbc7a2p5fv0za3x7bwl-llvm-22.0.0-rocm-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "mwn4zy4zxhxhcpbc7a2p5fv0za3x7bwl"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-guLf4cDiLJA1pmZXE0DggtL2GgJEvc3C/RnPzh/krc0="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/mxj713hjg99f1k233qn6y4s2sq66rb76-nghttp2-1.67.1-dev",
+      "name": "nghttp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/mxj713hjg99f1k233qn6y4s2sq66rb76-nghttp2-1.67.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "mxj713hjg99f1k233qn6y4s2sq66rb76"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-kgKsatA1Ss/mzUlIUiUtAeAiCcF7ZV+fkY4QwHXIprs="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.67.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/mxylb81fv1n7skrdlrxnpbzf344mkhy4-curl-8.18.0-dev",
+      "name": "curl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/mxylb81fv1n7skrdlrxnpbzf344mkhy4-curl-8.18.0-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "mxylb81fv1n7skrdlrxnpbzf344mkhy4"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-MrQBT/advHOTLxUtDBoipddObSU5YpUNYTKOEwNr/f8="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "8.18.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/n3a5qkiby5ksmcwx0xgg5x6ybcwqv65b-libpciaccess-0.18.1",
+      "name": "libpciaccess",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/n3a5qkiby5ksmcwx0xgg5x6ybcwqv65b-libpciaccess-0.18.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "n3a5qkiby5ksmcwx0xgg5x6ybcwqv65b"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-/bIE/1zf11sM5xaVFQinzxdvai/jYyLAeDJcGu7++nQ="
+        }
+      ],
+      "version": "0.18.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/n3vrp2rmg7q7j977y6jiwkdcyvfzx6x5-python3.13-distlib-0.4.0",
+      "name": "python3.13-distlib",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/n3vrp2rmg7q7j977y6jiwkdcyvfzx6x5-python3.13-distlib-0.4.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "n3vrp2rmg7q7j977y6jiwkdcyvfzx6x5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ubdio8HJAwY7YQs7Tu4ki0YCSO7U/W6xe0ASUbn/t9U="
+        }
+      ],
+      "version": "0.4.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/n8zbsvkx3pchv8v14qnwzdmvk0zvs31g-libssh2-1.11.1-dev",
+      "name": "libssh2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/n8zbsvkx3pchv8v14qnwzdmvk0zvs31g-libssh2-1.11.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "n8zbsvkx3pchv8v14qnwzdmvk0zvs31g"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-DtbT8mOD4RPYtpKAk+aLC29DoMLkKpZLQO/iXMiZe7Q="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "1.11.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/nj5s047i29y331ak837kb3i1wpnkw27s-compiler-rt-libc-22.0.0-rocm",
+      "name": "compiler-rt-libc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/nj5s047i29y331ak837kb3i1wpnkw27s-compiler-rt-libc-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "nj5s047i29y331ak837kb3i1wpnkw27s"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-vbIMM14JypwH+znGfYBQqFeSs6o8UHSTCewqEq8oGCg="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/njcs5bsgvn7qdzfr7kxjvn0fq8y6i4ys-gmp-6.3.0",
+      "name": "gmp",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/njcs5bsgvn7qdzfr7kxjvn0fq8y6i4ys-gmp-6.3.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "njcs5bsgvn7qdzfr7kxjvn0fq8y6i4ys"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-PhkPWjWUWO4JLpbz/qrssMt2uwZPzglMdZGfEjiaBpI="
+        }
+      ],
+      "version": "6.3.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/njwanmygmqc5vdhx22mnipiihqp39ysr-zlib-1.3.1-static",
+      "name": "zlib",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/njwanmygmqc5vdhx22mnipiihqp39ysr-zlib-1.3.1-static"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "njwanmygmqc5vdhx22mnipiihqp39ysr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-nYSMG41EsSHawSM8C2Pyx9a4AwRq2Hr9uoILBRVDBO0="
+        },
+        {
+          "name": "nix:output",
+          "value": "static"
+        }
+      ],
+      "version": "1.3.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/nnhkhd6pj8zqd3m3yanpgky02ywrkhms-ed-1.22.4",
+      "name": "ed",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/nnhkhd6pj8zqd3m3yanpgky02ywrkhms-ed-1.22.4"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "nnhkhd6pj8zqd3m3yanpgky02ywrkhms"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-bxWN9ITArnX+acTBaVMyIxyn6EvDQY3vnhzcUCg9i7s="
+        }
+      ],
+      "version": "1.22.4"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/p3j7lphwlci13f9w2v4rav6rbvpi80li-file-5.45",
+      "name": "file",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/p3j7lphwlci13f9w2v4rav6rbvpi80li-file-5.45"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "p3j7lphwlci13f9w2v4rav6rbvpi80li"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ojuaX9+zd3YrUVpmCKxckE188ZFxJj54icNmbHsiCTU="
+        }
+      ],
+      "version": "5.45"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq-make-symlinks-relative.sh",
+      "name": "make-symlinks-relative.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq-make-symlinks-relative.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-k5tloOeDGg4nsbolF2nQ8zSPuSOCJHmG/SnT48musDA="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/p69faj0lr3lqljvrnybmkpxw18skfqlf-isl-0.20",
+      "name": "isl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/p69faj0lr3lqljvrnybmkpxw18skfqlf-isl-0.20"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "p69faj0lr3lqljvrnybmkpxw18skfqlf"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-T/NqCf7quU3R1vf8VNRknakKN4i9ci3X8nvUBTAgwDk="
+        }
+      ],
+      "version": "0.20"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/p96a7p297gmia8zcy4i72qd45wzw8lh6-openssl-3.6.1",
+      "name": "openssl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/p96a7p297gmia8zcy4i72qd45wzw8lh6-openssl-3.6.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "p96a7p297gmia8zcy4i72qd45wzw8lh6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-HsWkqHR4qgeXU4hb+1BEGzC0fmzOiyh0fCZckw/6zKQ="
+        }
+      ],
+      "version": "3.6.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/pag6l61paj1dc9sv15l7bm5c17xn5kyk-move-systemd-user-units.sh",
+      "name": "move-systemd-user-units.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/pag6l61paj1dc9sv15l7bm5c17xn5kyk-move-systemd-user-units.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "pag6l61paj1dc9sv15l7bm5c17xn5kyk"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ApvZCwlSSuSA6bGuBQGi+EIncpLHju2Uhro27Mb8wMA="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/pdga1fmcl0jk25vaxxa6s2lp9z7ri1kg-perl5.42.0-Test-Fatal-0.017",
+      "name": "perl5.42.0-Test-Fatal",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/pdga1fmcl0jk25vaxxa6s2lp9z7ri1kg-perl5.42.0-Test-Fatal-0.017"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "pdga1fmcl0jk25vaxxa6s2lp9z7ri1kg"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-1/FQZc1kZjNHPDtDB0UyVypq0yFJiEYIcX5FKZs/X90="
+        }
+      ],
+      "version": "0.017"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/pilsssjjdxvdphlg2h19p0bfx5q0jzkn-strip.sh",
+      "name": "strip.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/pilsssjjdxvdphlg2h19p0bfx5q0jzkn-strip.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "pilsssjjdxvdphlg2h19p0bfx5q0jzkn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-/kocrQCaIGEh7zh26MuHLTtmIp5yJylHriY/yVFhPk4="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ps2qpwzsn2wrf4p7hk8xg97qgpjl315f-libpfm-4.13.0",
+      "name": "libpfm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ps2qpwzsn2wrf4p7hk8xg97qgpjl315f-libpfm-4.13.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ps2qpwzsn2wrf4p7hk8xg97qgpjl315f"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-zpdDrFpBGsZ4OHntD4PA+Vex+0/U/tr3HBC0Q2O9xrc="
+        }
+      ],
+      "version": "4.13.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/psnvdlvsgcjh4b9pdawd8n3xs0m4gf5a-uvwasi-0.0.23",
+      "name": "uvwasi",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/psnvdlvsgcjh4b9pdawd8n3xs0m4gf5a-uvwasi-0.0.23"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "psnvdlvsgcjh4b9pdawd8n3xs0m4gf5a"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-hxKQXdwcRKYAUeKEoyBlqzLFskFQi3by4+jL2w/gpYg="
+        }
+      ],
+      "version": "0.0.23"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/q151vxaxv1l4hmf7kccgs45h0xcngagp-icu4c-76.1-dev",
+      "name": "icu4c",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/q151vxaxv1l4hmf7kccgs45h0xcngagp-icu4c-76.1-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "q151vxaxv1l4hmf7kccgs45h0xcngagp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-m3rEzBxbz11IZk5jhaHFxTXTWOgp9sFIWO9VuRB2YUg="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "76.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/q8d0h2kvc0h3w6d5wrvipfp2kji7ph3c-util-linux-minimal-2.41.3-lib",
+      "name": "util-linux-minimal",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/q8d0h2kvc0h3w6d5wrvipfp2kji7ph3c-util-linux-minimal-2.41.3-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "q8d0h2kvc0h3w6d5wrvipfp2kji7ph3c"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-8gnwKvRX7IXc0RHE+bw8o/YXRFW0eZPOHtfQTmltl14="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "2.41.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/qhwhnj56gsfg30g0v1hh3qhxpnzwmx73-python3.13-identify-2.6.17",
+      "name": "python3.13-identify",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/qhwhnj56gsfg30g0v1hh3qhxpnzwmx73-python3.13-identify-2.6.17"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "qhwhnj56gsfg30g0v1hh3qhxpnzwmx73"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-E8Bax6mNxr5OnAEAftGNULCwTVc/NOqLMzsL5yY2i0E="
+        }
+      ],
+      "version": "2.6.17"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/qkykv5hi5zkkwqgvgyh91w3yy6rcg3nm-libev-4.33",
+      "name": "libev",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/qkykv5hi5zkkwqgvgyh91w3yy6rcg3nm-libev-4.33"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "qkykv5hi5zkkwqgvgyh91w3yy6rcg3nm"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-r5244ZLWuRiQdid+iR+2aP0r8Pj0ferYYxupQAb1mjA="
+        }
+      ],
+      "version": "4.33"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/qm4cngcbz2dx863cjabdfhibg93p9hw0-python3.13-pluggy-1.6.0",
+      "name": "python3.13-pluggy",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/qm4cngcbz2dx863cjabdfhibg93p9hw0-python3.13-pluggy-1.6.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "qm4cngcbz2dx863cjabdfhibg93p9hw0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-S/MOzOQyGL9Eo1TJoC2g0U5S+esGrtMWH6YOLJtUrlM="
+        }
+      ],
+      "version": "1.6.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/qpk88ppk49gbdgzhqr8chm3fhb2a2bdn-python3.13-cfgv-3.5.0",
+      "name": "python3.13-cfgv",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/qpk88ppk49gbdgzhqr8chm3fhb2a2bdn-python3.13-cfgv-3.5.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "qpk88ppk49gbdgzhqr8chm3fhb2a2bdn"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-IZ3IPUN+2fotni4wBI0o/tTzKGb1xs5OFNxQsTPOI40="
+        }
+      ],
+      "version": "3.5.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/qq12ssc5a12zpyjf5hgv3hpvhbqawby2-python3.13-iniconfig-2.3.0",
+      "name": "python3.13-iniconfig",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/qq12ssc5a12zpyjf5hgv3hpvhbqawby2-python3.13-iniconfig-2.3.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "qq12ssc5a12zpyjf5hgv3hpvhbqawby2"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-FzGCYUGSiIQk8ejQH4q1UHM30/RrXxuKk9+hvccCXf8="
+        }
+      ],
+      "version": "2.3.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/qvxaabi4w7isbp0vxqqsx4brl5n1qnjh-libpsl-0.21.5",
+      "name": "libpsl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/qvxaabi4w7isbp0vxqqsx4brl5n1qnjh-libpsl-0.21.5"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "qvxaabi4w7isbp0vxqqsx4brl5n1qnjh"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-SVt8ZxgfqBxuQsGn2rwdkH2qUW8MDW8/SbmEe45cIZ8="
+        }
+      ],
+      "version": "0.21.5"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/r178gy25f84af1pfnb947jvyxpx28h3w-hipClang",
+      "name": "hipClang",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/r178gy25f84af1pfnb947jvyxpx28h3w-hipClang"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "r178gy25f84af1pfnb947jvyxpx28h3w"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-eL6UMSSGz/+eD4ISvDdFvxOIxeGGlqI000zfcjpx+3E="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/r19vm8h8an06x571p118ijhv88jj680x-libpsl-0.21.5-dev",
+      "name": "libpsl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/r19vm8h8an06x571p118ijhv88jj680x-libpsl-0.21.5-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "r19vm8h8an06x571p118ijhv88jj680x"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-cV0UmcfpUuU8CrZnL889y/luuRUc8CslhBWOJ5DBJjo="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "0.21.5"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/r7vdyf8pwlqsgd5ydak9fmq3q1i5nm3m-xgcc-15.2.0-libgcc",
+      "name": "xgcc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/r7vdyf8pwlqsgd5ydak9fmq3q1i5nm3m-xgcc-15.2.0-libgcc"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "r7vdyf8pwlqsgd5ydak9fmq3q1i5nm3m"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Kp28+Cw7liNQYNAAztGRVxzq9+pyAwebVM+bDNxZjlI="
+        }
+      ],
+      "version": "15.2.0-libgcc"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/r9kx65g5cjf1ifsrh6b02y8jsvjprk36-libmpc-1.3.1",
+      "name": "libmpc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/r9kx65g5cjf1ifsrh6b02y8jsvjprk36-libmpc-1.3.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "r9kx65g5cjf1ifsrh6b02y8jsvjprk36"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-vild1CMLiB7ll9US2BYn/cB3ROMo2cL2HFIhB/bRVJY="
+        }
+      ],
+      "version": "1.3.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/rgif5d5i5lwpy57scya0znq5bai9w5cd-perl5.42.0-HTTP-Date-6.06",
+      "name": "perl5.42.0-HTTP-Date",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/rgif5d5i5lwpy57scya0znq5bai9w5cd-perl5.42.0-HTTP-Date-6.06"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "rgif5d5i5lwpy57scya0znq5bai9w5cd"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-MDJry/Gmta3481PZKRc9o7m1zc3ZL4zxWvKNaAOGlEs="
+        }
+      ],
+      "version": "6.06"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/rx7f1i2jbignsr6qm3x65csidd2xqcq3-perl5.42.0-HTTP-Negotiate-6.01",
+      "name": "perl5.42.0-HTTP-Negotiate",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/rx7f1i2jbignsr6qm3x65csidd2xqcq3-perl5.42.0-HTTP-Negotiate-6.01"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "rx7f1i2jbignsr6qm3x65csidd2xqcq3"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-leFeYK9N3WNHisttN9ImwKVwMy0nydkMiPSctHJr0Ek="
+        }
+      ],
+      "version": "6.01"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/s0xj50a5awma0jwgsqws61014nxzxy19-gnu-config-2024-01-01",
+      "name": "gnu-config",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/s0xj50a5awma0jwgsqws61014nxzxy19-gnu-config-2024-01-01"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "s0xj50a5awma0jwgsqws61014nxzxy19"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-bEs+jJogn3RBkZ3KpP73/vG1x7ZFORxU4fFXC9HGg9A="
+        }
+      ],
+      "version": "2024-01-01"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/s28xbwq6c0pl9vd74rfwyby4qxdha4mz-perl5.42.0-Try-Tiny-0.31",
+      "name": "perl5.42.0-Try-Tiny",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/s28xbwq6c0pl9vd74rfwyby4qxdha4mz-perl5.42.0-Try-Tiny-0.31"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "s28xbwq6c0pl9vd74rfwyby4qxdha4mz"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-mRh4fMX5TWZxaWNnGP713CyGUhCY80zdhQ5QDfZbsZM="
+        }
+      ],
+      "version": "0.31"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/s3mbjsdbj4hd55pwvb0ac5f8qh6nv56p-rocm-smi-7.2.0",
+      "name": "rocm-smi",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/s3mbjsdbj4hd55pwvb0ac5f8qh6nv56p-rocm-smi-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "s3mbjsdbj4hd55pwvb0ac5f8qh6nv56p"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-mk697rfyT1rc7VfWAf/gmZqfMRdRuzEwJTCEqzVK4qU="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/sb2rv4sivgmmgdwszyhjbsb51gs3dpai-brotli-1.2.0-lib",
+      "name": "brotli",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/sb2rv4sivgmmgdwszyhjbsb51gs3dpai-brotli-1.2.0-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "sb2rv4sivgmmgdwszyhjbsb51gs3dpai"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-+2S9iZTTIdEQ6Mb1xarEM0N2LTAiYlP20y7cw71ay4Y="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "1.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/sca0pf46jmxva40qahkcwys5c1lvk6n2-gcc-15.2.0",
+      "name": "gcc",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/sca0pf46jmxva40qahkcwys5c1lvk6n2-gcc-15.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "sca0pf46jmxva40qahkcwys5c1lvk6n2"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-GDLGwRpKSQGBenopw1ENZ38EbJsebxNTsRbdKlX/HAA="
+        }
+      ],
+      "version": "15.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/skq7kivsvp0g5c1jpk1qan8mmy2virvz-curl-8.18.0-man",
+      "name": "curl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/skq7kivsvp0g5c1jpk1qan8mmy2virvz-curl-8.18.0-man"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "skq7kivsvp0g5c1jpk1qan8mmy2virvz"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Y0Cdxlu0gHhAnvk+78cDHAP/yrjibnbPq/wynY9gEHI="
+        },
+        {
+          "name": "nix:output",
+          "value": "man"
+        }
+      ],
+      "version": "8.18.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/swibh67af55w3pxsjlksyxfihamf9i2z-git-minimal-2.53.0",
+      "name": "git-minimal",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/swibh67af55w3pxsjlksyxfihamf9i2z-git-minimal-2.53.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "swibh67af55w3pxsjlksyxfihamf9i2z"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-AX3+N/xHNDuDk5PIfipV4wh4jFApIi2b2hpPZsmV2tQ="
+        }
+      ],
+      "version": "2.53.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/v37y2wqh86akn9wr5f9fr6n6hzdw6ric-zlib-ng-2.3.3",
+      "name": "zlib-ng",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/v37y2wqh86akn9wr5f9fr6n6hzdw6ric-zlib-ng-2.3.3"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "v37y2wqh86akn9wr5f9fr6n6hzdw6ric"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-msSO5U6hCbSO/VaCAloPWQh2LdXzWYKJsWQ189fkq38="
+        }
+      ],
+      "version": "2.3.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/v63pwwaj7y1c3zkm9jx09lzsdp0zh72v-nghttp2-1.67.1",
+      "name": "nghttp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/v63pwwaj7y1c3zkm9jx09lzsdp0zh72v-nghttp2-1.67.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "v63pwwaj7y1c3zkm9jx09lzsdp0zh72v"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-sZIhDInboHSHtW95PpEehdTiRNP1uN4cO7sjcMn+9FM="
+        }
+      ],
+      "version": "1.67.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/vfa8fqz4k8dnlwivphif88qai54nxnqf-acl-2.3.2",
+      "name": "acl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/vfa8fqz4k8dnlwivphif88qai54nxnqf-acl-2.3.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "vfa8fqz4k8dnlwivphif88qai54nxnqf"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-nYutyTiYiB0Dwlz/6UZ9sapabNjlESVhxRDX2/B9sYI="
+        }
+      ],
+      "version": "2.3.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/vkzs8866xd7lgxq67663jjp7bcrmg815-gcc-prefix-headers",
+      "name": "gcc-prefix-headers",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/vkzs8866xd7lgxq67663jjp7bcrmg815-gcc-prefix-headers"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "vkzs8866xd7lgxq67663jjp7bcrmg815"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-UGRCLQi6sdW7deW7QU7iojJ551ll2aa1SznRrgyauOQ="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/vl8jkqpr0l3fac3cxiy4nwc5paiww1lv-zlib-1.3.1",
+      "name": "zlib",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/vl8jkqpr0l3fac3cxiy4nwc5paiww1lv-zlib-1.3.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "vl8jkqpr0l3fac3cxiy4nwc5paiww1lv"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-v3v4SDZ9Q/1aE0ZqsF762YCRTEq+A85RuCg58jksVWY="
+        }
+      ],
+      "version": "1.3.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/vlb2v7nwxw835ykkz0k43bjm6qknvv4x-perl5.42.0-Authen-SASL-2.1900",
+      "name": "perl5.42.0-Authen-SASL",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/vlb2v7nwxw835ykkz0k43bjm6qknvv4x-perl5.42.0-Authen-SASL-2.1900"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "vlb2v7nwxw835ykkz0k43bjm6qknvv4x"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-9TqKnhtR1Pz6nIdHXYMUvmO1YwFCk7cvQzRaB29pkE0="
+        }
+      ],
+      "version": "2.1900"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/w1n7yp2vnldr395hbwbcaw9sflh413bm-gzip-1.14",
+      "name": "gzip",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/w1n7yp2vnldr395hbwbcaw9sflh413bm-gzip-1.14"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "w1n7yp2vnldr395hbwbcaw9sflh413bm"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-QU6F2hDLH7Jbz2h/+hqLGnOYf46pqpCoMwV9nAp6/ro="
+        }
+      ],
+      "version": "1.14"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/w7hyxgvvq38bdx5jv9rq9gpk1zynzd8b-python3.13-cffi-2.0.0",
+      "name": "python3.13-cffi",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/w7hyxgvvq38bdx5jv9rq9gpk1zynzd8b-python3.13-cffi-2.0.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "w7hyxgvvq38bdx5jv9rq9gpk1zynzd8b"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-TVdPL+fX5nnHYBcGGDiV1fmRIB2Yr4y8AtEycd3zOZ0="
+        }
+      ],
+      "version": "2.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wcmcai1w6ww72hflq95k61fsx7kz0d2q-icu4c-76.1",
+      "name": "icu4c",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wcmcai1w6ww72hflq95k61fsx7kz0d2q-icu4c-76.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wcmcai1w6ww72hflq95k61fsx7kz0d2q"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-GSNYh+PLmCHuE2j+woOR63yhpkSjYtoA6V1NC/0utP4="
+        }
+      ],
+      "version": "76.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wcmkd6d74qycjhsnhy8nnkss2g74501i-perl5.42.0-FCGI-0.82",
+      "name": "perl5.42.0-FCGI",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wcmkd6d74qycjhsnhy8nnkss2g74501i-perl5.42.0-FCGI-0.82"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wcmkd6d74qycjhsnhy8nnkss2g74501i"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-6TwQqoSu2P3sHVACYQ3waCMCahSoKwmCe5Os94/G4to="
+        }
+      ],
+      "version": "0.82"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wcvrykaf90nmr0rikx6gy178ffvrxdj4-mpdecimal-4.0.1",
+      "name": "mpdecimal",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wcvrykaf90nmr0rikx6gy178ffvrxdj4-mpdecimal-4.0.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wcvrykaf90nmr0rikx6gy178ffvrxdj4"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-dyHIaOLSwq7Cy/WMbgNBsOlwLj61G7JKSwuFhi08Q4U="
+        }
+      ],
+      "version": "4.0.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wf5yaymh8q9mwz9k0yg7354yhs59yjcp-getopt-1.1.6",
+      "name": "getopt",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wf5yaymh8q9mwz9k0yg7354yhs59yjcp-getopt-1.1.6"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wf5yaymh8q9mwz9k0yg7354yhs59yjcp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-ooMaQc6yW9hbhXaud0VxH/CbiBbeWqhN/OMxhdHummc="
+        }
+      ],
+      "version": "1.1.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/whs07fdxlw22fi8b3jzd2z871dh41qx6-sqlite-3.51.2",
+      "name": "sqlite",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/whs07fdxlw22fi8b3jzd2z871dh41qx6-sqlite-3.51.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "whs07fdxlw22fi8b3jzd2z871dh41qx6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-gMU0yopaGUMWxZOciExpIbh2hCs7+M1L+VM5jzKKPSk="
+        }
+      ],
+      "version": "3.51.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wl0wp0f4cymd4bsnc2yfhasvz1cbaw0i-python3.13-filelock-3.20.3",
+      "name": "python3.13-filelock",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wl0wp0f4cymd4bsnc2yfhasvz1cbaw0i-python3.13-filelock-3.20.3"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wl0wp0f4cymd4bsnc2yfhasvz1cbaw0i"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-S+FPAHGzc8Ms52MfOL1i7PYe8wa79vX4irMBAhgGFJU="
+        }
+      ],
+      "version": "3.20.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wv7qq5yb8plyhxji9x3r5gpkyfm2kf29-gnused-4.9",
+      "name": "gnused",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wv7qq5yb8plyhxji9x3r5gpkyfm2kf29-gnused-4.9"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wv7qq5yb8plyhxji9x3r5gpkyfm2kf29"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-PavUA85tBjuBiphavpCbtPAuo6QQ16AmjBaeifTU/ko="
+        }
+      ],
+      "version": "4.9"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wwckb31fcbwj479g7qwcb3b7cv6416pf-libglvnd-1.7.0",
+      "name": "libglvnd",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wwckb31fcbwj479g7qwcb3b7cv6416pf-libglvnd-1.7.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wwckb31fcbwj479g7qwcb3b7cv6416pf"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-wYVLaxg/xstSZ7B1SV2OfRE/5a1O2fcwBkDTUFEI3kw="
+        }
+      ],
+      "version": "1.7.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/wz6zrlcl24d7xygzgp460f92icn8zlhj-xxHash-0.8.3",
+      "name": "xxHash",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/wz6zrlcl24d7xygzgp460f92icn8zlhj-xxHash-0.8.3"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "wz6zrlcl24d7xygzgp460f92icn8zlhj"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-919O1QCbSCREHMVxm5+gPn5nXYwbQHu1ua/cCqpkj10="
+        }
+      ],
+      "version": "0.8.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/x4mz2jzaayv8q5wrprwl0xzgszg6wk7v-perl5.42.0-HTTP-Message-6.45",
+      "name": "perl5.42.0-HTTP-Message",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/x4mz2jzaayv8q5wrprwl0xzgszg6wk7v-perl5.42.0-HTTP-Message-6.45"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "x4mz2jzaayv8q5wrprwl0xzgszg6wk7v"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-5WGitFXZoY8cQhIuUrpq0jpZUjJ/ae50BmvVQEMsdTc="
+        }
+      ],
+      "version": "6.45"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/x69r1kwhyzlq5c8cmb6pa6r5va07diih-llvm-binutils-wrapper-22.0.0-rocm",
+      "name": "llvm-binutils-wrapper",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/x69r1kwhyzlq5c8cmb6pa6r5va07diih-llvm-binutils-wrapper-22.0.0-rocm"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "x69r1kwhyzlq5c8cmb6pa6r5va07diih"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-krP9q6RX5TSq+1ktP4wnC6WTtnuS0/BUonQsrzxEBRs="
+        }
+      ],
+      "version": "22.0.0-rocm"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/x8c40nfigps493a07sdr2pm5s9j1cdc0-patch-shebangs.sh",
+      "name": "patch-shebangs.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/x8c40nfigps493a07sdr2pm5s9j1cdc0-patch-shebangs.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "x8c40nfigps493a07sdr2pm5s9j1cdc0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Y+mTMb/qaZCpgiEEn+WlqfPOp7xeZhIPZttAN+9F/tI="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/x8l7qzpab2gpdrp89g48mxlrsiz4f0gm-bzip2-1.0.8-bin",
+      "name": "bzip2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/x8l7qzpab2gpdrp89g48mxlrsiz4f0gm-bzip2-1.0.8-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "x8l7qzpab2gpdrp89g48mxlrsiz4f0gm"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-8es1FYilhIR2mLaVTW+CFP5+Fm/V23H0demSM9Uqcwg="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "1.0.8"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/xfjkn6pgqyd4h18fdbf5fshadqyzdklp-krb5-1.22.1-lib",
+      "name": "krb5",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/xfjkn6pgqyd4h18fdbf5fshadqyzdklp-krb5-1.22.1-lib"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "xfjkn6pgqyd4h18fdbf5fshadqyzdklp"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-LZ8PnLMVDk5IrVyyv0XXhiaYF28R5yF2vyQzCW/rK1g="
+        },
+        {
+          "name": "nix:output",
+          "value": "lib"
+        }
+      ],
+      "version": "1.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/xi7zkfs5dm3s7spplqzyxcg0ih7375dc-python3.13-pygments-2.19.2",
+      "name": "python3.13-pygments",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/xi7zkfs5dm3s7spplqzyxcg0ih7375dc-python3.13-pygments-2.19.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "xi7zkfs5dm3s7spplqzyxcg0ih7375dc"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-GywHBRTHjGpabs23TOQg67qrVAa7Wn374uuK8t4RgX4="
+        }
+      ],
+      "version": "2.19.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/xks3v41w0rqp27a17kwkybcvr39rxpl8-zstd-1.5.7-bin",
+      "name": "zstd",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/xks3v41w0rqp27a17kwkybcvr39rxpl8-zstd-1.5.7-bin"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "xks3v41w0rqp27a17kwkybcvr39rxpl8"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-F9Zdmev+kXhdUCZqp5aRR1NqlYov7VjMrrd4ln71QqA="
+        },
+        {
+          "name": "nix:output",
+          "value": "bin"
+        }
+      ],
+      "version": "1.5.7"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/xkwhw6gvya1k5imjy49bsr8229lg28fv-perl5.42.0-Net-SSLeay-1.92",
+      "name": "perl5.42.0-Net-SSLeay",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/xkwhw6gvya1k5imjy49bsr8229lg28fv-perl5.42.0-Net-SSLeay-1.92"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "xkwhw6gvya1k5imjy49bsr8229lg28fv"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-/BsVayTS1EWkyYcUaTPGSg9rQy1E28OBrYcNoRd+pes="
+        }
+      ],
+      "version": "1.92"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/xxxiiqjcir30wgyr24cx9s1a135flfhw-perl5.42.0-libwww-perl-6.72",
+      "name": "perl5.42.0-libwww-perl",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/xxxiiqjcir30wgyr24cx9s1a135flfhw-perl5.42.0-libwww-perl-6.72"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "xxxiiqjcir30wgyr24cx9s1a135flfhw"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-SjH53mM+y2i58/mYKhcwM5oHsBJu0u3tZcxfObdsE80="
+        }
+      ],
+      "version": "6.72"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/xyff06pkhki3qy1ls77w10s0v79c9il0-reproducible-builds.sh",
+      "name": "reproducible-builds.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/xyff06pkhki3qy1ls77w10s0v79c9il0-reproducible-builds.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "xyff06pkhki3qy1ls77w10s0v79c9il0"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-9TquSNTf3+sENOwMmBFmniGPTzbIX9Sn2PFfuJ4i0UA="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/y7yfaxd7jsldgfvxpj3vlqcyidakp36y-publicsuffix-list-0-unstable-2026-01-25",
+      "name": "publicsuffix-list",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/y7yfaxd7jsldgfvxpj3vlqcyidakp36y-publicsuffix-list-0-unstable-2026-01-25"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "y7yfaxd7jsldgfvxpj3vlqcyidakp36y"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-cJoXqckscCD9lgrI654ortqciElmt2isKDIFOYQhHEA="
+        }
+      ],
+      "version": "0-unstable-2026-01-25"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/y9085qj0nl9yr9px055n2mlnhx1pkfmw-ngtcp2-1.19.0",
+      "name": "ngtcp2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/y9085qj0nl9yr9px055n2mlnhx1pkfmw-ngtcp2-1.19.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "y9085qj0nl9yr9px055n2mlnhx1pkfmw"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-b/wr4D/7iv4QXFbagqB2K49n5G3lJxXnXmdlL7q2rwc="
+        }
+      ],
+      "version": "1.19.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/y9xh8dxxbi6ss7mawx5glgazslii4f63-mpfr-4.2.2",
+      "name": "mpfr",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/y9xh8dxxbi6ss7mawx5glgazslii4f63-mpfr-4.2.2"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "y9xh8dxxbi6ss7mawx5glgazslii4f63"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-WUgkMXm0OuGaURt/aGNM4jTqhtrghih4/ojf1Yf4khg="
+        }
+      ],
+      "version": "4.2.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ydpw9xwv0j5v8swa6wlz1ag2p19635mi-bzip2-1.0.8",
+      "name": "bzip2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ydpw9xwv0j5v8swa6wlz1ag2p19635mi-bzip2-1.0.8"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ydpw9xwv0j5v8swa6wlz1ag2p19635mi"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-zbORFLf9Z9D1dbQxl9DLPUmib1rcEXqIZXvcyjSspwE="
+        }
+      ],
+      "version": "1.0.8"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/yfpwi6x8hs7b1958gcazm007cqc55ryv-llhttp-9.3.0-dev",
+      "name": "llhttp",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/yfpwi6x8hs7b1958gcazm007cqc55ryv-llhttp-9.3.0-dev"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "yfpwi6x8hs7b1958gcazm007cqc55ryv"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-deyJg25ZpOhu/RYWpbn2Ngo5u84AkjIoKIB3sLsjxOs="
+        },
+        {
+          "name": "nix:output",
+          "value": "dev"
+        }
+      ],
+      "version": "9.3.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ygjrcj8viz09kcq8mspnlxd79n5kk303-perl5.42.0-Test-RequiresInternet-0.05",
+      "name": "perl5.42.0-Test-RequiresInternet",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ygjrcj8viz09kcq8mspnlxd79n5kk303-perl5.42.0-Test-RequiresInternet-0.05"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ygjrcj8viz09kcq8mspnlxd79n5kk303"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-RtsD7fRj85NcBe/3tghtlww5AFK5lQzZnQxd9/LZylc="
+        }
+      ],
+      "version": "0.05"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/ylvn8sswwfdp6l71hmz9ic8m4w9996j5-libidn2-2.3.8",
+      "name": "libidn2",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/ylvn8sswwfdp6l71hmz9ic8m4w9996j5-libidn2-2.3.8"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "ylvn8sswwfdp6l71hmz9ic8m4w9996j5"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-rcVlnplZkJrRID7B/A4hB+0A9TpvsgpmfERD+hJlnoU="
+        }
+      ],
+      "version": "2.3.8"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/yqkhp0j27pk15yd2wmqjkjbglwaa5z1l-nodejs-slim-22.22.1",
+      "name": "nodejs-slim",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/yqkhp0j27pk15yd2wmqjkjbglwaa5z1l-nodejs-slim-22.22.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "yqkhp0j27pk15yd2wmqjkjbglwaa5z1l"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-Y+2BHBee6ata9R9zkIgQiYq2Zd/PTmNvpq9IWh9zxPc="
+        }
+      ],
+      "version": "22.22.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/z7k98578dfzi6l3hsvbivzm7hfqlk0zc-set-source-date-epoch-to-latest.sh",
+      "name": "set-source-date-epoch-to-latest.sh",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/z7k98578dfzi6l3hsvbivzm7hfqlk0zc-set-source-date-epoch-to-latest.sh"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "z7k98578dfzi6l3hsvbivzm7hfqlk0zc"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-O6Gjn5FQzTLFmOLmXU5J4i6ei4gvLK7fo6vA+C0lmn0="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/z7xv3cj72mhagg6wri2slmxqh213fwbr-libdrm-2.4.131",
+      "name": "libdrm",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/z7xv3cj72mhagg6wri2slmxqh213fwbr-libdrm-2.4.131"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "z7xv3cj72mhagg6wri2slmxqh213fwbr"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-uic8sC6eEPVfiRKrWyidDCK+Q7AerFj760ht7HTJa70="
+        }
+      ],
+      "version": "2.4.131"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/zazyqw99wg344d25i0iqhg59vpq0l256-rocblas-7.2.0",
+      "name": "rocblas",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/zazyqw99wg344d25i0iqhg59vpq0l256-rocblas-7.2.0"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "zazyqw99wg344d25i0iqhg59vpq0l256"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-lzyXkzm/FIBvTJDTb9cY0a+LrhC/6kskQI6iZfZV6a4="
+        }
+      ],
+      "version": "7.2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/zdbhp4571kff54fwr71laia1p5yxw330-libx11-1.8.12",
+      "name": "libx11",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/zdbhp4571kff54fwr71laia1p5yxw330-libx11-1.8.12"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "zdbhp4571kff54fwr71laia1p5yxw330"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-iv5XpxJEDbZWdaiH8rEBhSmZUzFUP9eiGxms1WROREI="
+        }
+      ],
+      "version": "1.8.12"
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/zkiy4zv8wz3v95bj6fdmkqwql8x1vnhb-stdenv-linux",
+      "name": "stdenv-linux",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/zkiy4zv8wz3v95bj6fdmkqwql8x1vnhb-stdenv-linux"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "zkiy4zv8wz3v95bj6fdmkqwql8x1vnhb"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-A65pgj20sA9TmPMO7i7WqkCKyIipHrs43tAvHbTH6V8="
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "/nix/store/zwamcvd0ddn6f3b37kd6n04g68s4i5l6-pre-commit-4.5.1",
+      "name": "pre-commit",
+      "properties": [
+        {
+          "name": "nix:store-path",
+          "value": "/nix/store/zwamcvd0ddn6f3b37kd6n04g68s4i5l6-pre-commit-4.5.1"
+        },
+        {
+          "name": "nix:output-hash",
+          "value": "zwamcvd0ddn6f3b37kd6n04g68s4i5l6"
+        },
+        {
+          "name": "nix:nar-hash",
+          "value": "sha256-dc9qQLxrXP2GnxaAkgbJGGWLt9pU6z2CqaIg9pKc2QA="
+        }
+      ],
+      "version": "4.5.1"
+    }
+  ]
+}

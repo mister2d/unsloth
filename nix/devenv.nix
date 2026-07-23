@@ -143,6 +143,164 @@ let
       studio/backend/requirements/base.txt studio/backend/requirements/studio.txt
     rm -f nix/lock-override.txt
     echo "Wrote nix/requirements.lock.txt — review and commit it (see nix/CLAUDE.md maintenance notes)."
+
+    # ── SBOMs (CycloneDX) ────────────────────────────────────────────────
+    # Regenerating the lock and regenerating the SBOMs are ONE maintenance
+    # action (bundled here on purpose, not a second script) so the two never
+    # drift: whenever the Python closure changes, both traceability documents
+    # are rewritten in the same step. Two independently-generated CycloneDX 1.6
+    # JSON docs are emitted — deliberately NOT a hand-merged single file:
+    #   nix/sbom-python.cdx.json  — the pip/PyPI dependency closure (this lock)
+    #   nix/sbom-nix.cdx.json     — the Nix/system devShell store-path closure
+    # Each references the other in its own metadata. See nix/README.md for the
+    # what/why and the deliberate two-file split.
+    echo "Regenerating SBOMs (CycloneDX)..."
+
+    # Python layer: cyclonedx-py parses the freshly-written lock. Run it
+    # EPHEMERALLY via uvx (never a permanent venv/lock dependency — same spirit
+    # as this compile step being a one-off maintenance action). --python
+    # "$VENV_PYTHON" pins uvx to the nix-built venv interpreter, because uv's own
+    # downloaded CPython is a generic-linux binary that cannot run on NixOS.
+    # --output-reproducible drops the timestamp and random serialNumber so a
+    # regenerated SBOM diffs cleanly across an upstream merge (the entire point
+    # of keeping it in git). The index URLs mirror the lock's own emitted
+    # directives so component references stay accurate.
+    uvx --python "$VENV_PYTHON" --from cyclonedx-bom cyclonedx-py requirements \
+      nix/requirements.lock.txt \
+      --output-format JSON --output-reproducible --spec-version 1.6 \
+      --index-url https://pypi.org/simple \
+      --extra-index-url https://download.pytorch.org/whl/rocm7.1 \
+      -o nix/sbom-python.cdx.json
+
+    # Point the Python doc at its Nix-layer sibling (cyclonedx-py can't emit
+    # custom metadata properties itself). Idempotent: re-running never dupes.
+    "$VENV_PYTHON" - nix/sbom-python.cdx.json <<'PY_XREF'
+import json, sys
+p = sys.argv[1]
+d = json.load(open(p))
+props = d.setdefault("metadata", {}).setdefault("properties", [])
+have = {x.get("name") for x in props}
+for name, value in (("unsloth:sbom-layer", "python"),
+                    ("unsloth:sibling-sbom", "nix/sbom-nix.cdx.json")):
+    if name not in have:
+        props.append({"name": name, "value": value})
+json.dump(d, open(p, "w"), indent=2, ensure_ascii=False)
+open(p, "a").write("\n")
+PY_XREF
+
+    # Nix/system layer: no standard nix->CycloneDX tool exists, so derive it
+    # in-repo. Enumerate the devShell's full transitive store-path closure and
+    # emit one component per path — name/version parsed from the store-path
+    # basename (path-info's own "version" field is the JSON schema version, not
+    # the package version), exact provenance carried as nix:store-path /
+    # nix:output-hash properties, and the nixpkgs commit (the root of trust for
+    # this layer) read from flake.lock and recorded as BOM metadata. The
+    # generator is written to a temp file so path-info can stream to it on stdin.
+    GEN_NIX_SBOM="$DEVENV_STATE/nix-sbom-gen.py"
+    cat > "$GEN_NIX_SBOM" <<'PY_NIX_SBOM'
+import json, sys, re
+
+# Reads `nix path-info -r --json` from stdin; argv: <flake.lock> <output.json>.
+flake_lock_path = sys.argv[1]
+out_path = sys.argv[2]
+
+paths = json.load(sys.stdin)
+
+with open(flake_lock_path) as f:
+    lock = json.load(f)
+nixpkgs_commit = lock["nodes"]["nixpkgs"]["locked"]["rev"]
+
+STORE_RE = re.compile(r"^/nix/store/([a-z0-9]{32})-(.+)$")
+
+# Trailing tokens that denote a Nix *output* (a build product of the same
+# package) rather than part of the version. One store path == one output.
+KNOWN_OUTPUTS = {
+    "dev", "bin", "lib", "man", "doc", "devdoc", "out", "info", "static",
+    "debug", "dist", "devman", "npm", "corepack", "py",
+}
+
+def parse_name_version(basename):
+    # nixpkgs names store paths <pname>-<version>[-<output>]. Peel a trailing
+    # known-output token, then treat the first hyphen-token starting with a
+    # digit as the version start; everything before it is the name.
+    tokens = basename.split("-")
+    output = None
+    if len(tokens) > 1 and tokens[-1] in KNOWN_OUTPUTS:
+        output = tokens.pop()
+    ver_idx = next((i for i, t in enumerate(tokens) if t and t[0].isdigit()), None)
+    if ver_idx is None or ver_idx == 0:
+        return (basename if output is None else "-".join(tokens)), None, output
+    return "-".join(tokens[:ver_idx]), "-".join(tokens[ver_idx:]), output
+
+components = []
+for store_path in sorted(paths):
+    info = paths[store_path]
+    m = STORE_RE.match(store_path)
+    if not m:
+        continue
+    out_hash, basename = m.group(1), m.group(2)
+    name, version, output = parse_name_version(basename)
+    props = [
+        {"name": "nix:store-path", "value": store_path},
+        {"name": "nix:output-hash", "value": out_hash},
+    ]
+    if info.get("narHash"):
+        props.append({"name": "nix:nar-hash", "value": info["narHash"]})
+    if output:
+        props.append({"name": "nix:output", "value": output})
+    comp = {"type": "library", "bom-ref": store_path, "name": name, "properties": props}
+    if version:
+        comp["version"] = version
+    components.append(comp)
+
+bom = {
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.6",
+    "version": 1,
+    "metadata": {
+        "component": {
+            "type": "application",
+            "bom-ref": "unsloth-amd-devenv-shell",
+            "name": "unsloth-studio-amd-devenv-shell",
+            "description": (
+                "Nix/system layer of the Unsloth Studio AMD/ROCm devenv: the "
+                "transitive store-path closure of the flake's devShell (dev "
+                "tooling + ROCm runtime libraries). The Python ML stack is NOT "
+                "here - see the sibling SBOM nix/sbom-python.cdx.json."
+            ),
+        },
+        "properties": [
+            {"name": "nix:nixpkgs-commit", "value": nixpkgs_commit},
+            {"name": "nix:flake-ref", "value": "github:NixOS/nixpkgs/" + nixpkgs_commit},
+            {"name": "unsloth:sbom-layer", "value": "nix-system"},
+            {"name": "unsloth:sibling-sbom", "value": "nix/sbom-python.cdx.json"},
+            {"name": "unsloth:purl-note",
+             "value": ("no standard pkg:nix PackageURL scheme exists; components "
+                       "carry no purl and are identified by name+version plus the "
+                       "nix:store-path / nix:output-hash properties (the exact "
+                       "provenance) instead")},
+        ],
+        "tools": {"components": [
+            {"type": "application", "name": "nix path-info",
+             "description": "closure enumeration (nix path-info -r --json)"},
+            {"type": "application", "name": "unsloth-nix-sbom",
+             "description": "in-repo Nix->CycloneDX generator, run by the lock-deps devenv script"},
+        ]},
+    },
+    "components": components,
+}
+
+with open(out_path, "w") as f:
+    json.dump(bom, f, indent=2, ensure_ascii=False)
+    f.write("\n")
+
+print("wrote", out_path, "with", len(components), "components")
+PY_NIX_SBOM
+    nix path-info -r --json "$REPO_ROOT/nix#devShells.x86_64-linux.default" \
+      | "$VENV_PYTHON" "$GEN_NIX_SBOM" nix/flake.lock nix/sbom-nix.cdx.json
+    rm -f "$GEN_NIX_SBOM"
+
+    echo "Wrote nix/sbom-python.cdx.json and nix/sbom-nix.cdx.json — review and commit them (see nix/README.md)."
   '';
 in {
   # ── Packages ───────────────────────────────────────────────────────────
